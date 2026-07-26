@@ -145,7 +145,7 @@
   }
   .division-card:hover{transform:translateY(-4px); border-color:rgba(15,190,133,.4);}
   .division-card .tag{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--accent); margin-bottom:14px; display:block;}
-  .division-card h3{font-size:22px; font-weight:700; margin-bottom:10px;}
+  .division-card h3{font-size:22px; font-weight:700; margin-bottom:10px; display:flex; align-items:center; gap:10px;}
   .division-card p{font-size:14px; color:var(--muted-light); line-height:1.6;}
 
   /* ---------- ABOUT ---------- */
@@ -202,7 +202,7 @@
     background:rgba(255,255,255,.02); border:1px solid var(--ink-line); border-radius:24px; padding:48px;
     display:grid; grid-template-columns:0.8fr 1.2fr; gap:48px; align-items:center;
   }
-  .offer-badge{display:inline-block; background:rgba(255,46,147,.15); color:#FF2E93; border:1px solid rgba(255,46,147,.3); padding:4px 14px; border-radius:100px; font-size:11.5px; font-weight:700; margin-bottom:16px;}
+  .offer-badge{display:inline-flex; align-items:center; gap:6px; background:rgba(15,190,133,.12); color:var(--accent); border:1px solid rgba(15,190,133,.3); padding:4px 14px; border-radius:100px; font-size:11.5px; font-weight:700; margin-bottom:16px;}
   .offer-price{font-size:52px; font-weight:800; font-family:'Bricolage Grotesque', sans-serif; line-height:1; margin-bottom:8px;}
   .offer-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:12px; font-size:14px; color:var(--muted-light);}
   .offer-grid div{display:flex; align-items:center; gap:8px;}
@@ -335,8 +335,8 @@
     <h1 class="display">We Build <em>Businesses</em>,<br>Not Just Software.</h1>
     <p class="sub">We partner with startups, businesses, and educational institutions to build digital solutions, automate operations, and accelerate sustainable growth.</p>
     <div class="cta-row">
-      <button onclick="openModal()" class="btn btn-primary">Start Your Project</button>
-      <a href="#contact" class="btn btn-ghost">Book a Free Consultation</a>
+      <button onclick="openModal()" class="btn btn-primary"><i class="bi bi-rocket-takeoff-fill"></i> Start Your Project</button>
+      <a href="#contact" class="btn btn-ghost"><i class="bi bi-calendar-event"></i> Book a Free Consultation</a>
     </div>
   </div>
   <div class="scroll-cue"><div class="line"></div>Scroll</div>
@@ -352,27 +352,27 @@
     <div class="division-grid reveal">
       <div class="division-card">
         <span class="tag">AI Products</span>
-        <h3>🤖 Alpha AI</h3>
+        <h3><i class="bi bi-robot" style="color:var(--accent);"></i> Alpha AI</h3>
         <p>Custom AI chatbots, autonomous AI agents, workflow automation engines, and NLP model integration.</p>
       </div>
       <div class="division-card">
         <span class="tag">Consulting</span>
-        <h3>💼 Alpha Business</h3>
+        <h3><i class="bi bi-briefcase" style="color:var(--accent);"></i> Alpha Business</h3>
         <p>Enterprise digital strategy, custom CRM/ERP systems, software engineering, and performance marketing.</p>
       </div>
       <div class="division-card">
         <span class="tag">Education</span>
-        <h3>🎓 Alpha Academy</h3>
+        <h3><i class="bi bi-mortarboard" style="color:var(--accent);"></i> Alpha Academy</h3>
         <p>Practical AI bootcamps, faculty development programs, student industrial training, and career mentorship.</p>
       </div>
       <div class="division-card">
         <span class="tag">Hosting</span>
-        <h3>☁ Alpha Cloud</h3>
+        <h3><i class="bi bi-cloud-check" style="color:var(--accent);"></i> Alpha Cloud</h3>
         <p>High-performance cloud hosting, VPS deployment, automated CI/CD pipelines, and cloud security.</p>
       </div>
       <div class="division-card" style="grid-column: span 2;">
         <span class="tag">Incubation</span>
-        <h3>🚀 Alpha Labs</h3>
+        <h3><i class="bi bi-rocket-takeoff" style="color:var(--accent);"></i> Alpha Labs</h3>
         <p>In-house R&D lab building proprietary SaaS products, AI frameworks, and incubating high-impact tech ventures.</p>
       </div>
     </div>
@@ -409,7 +409,7 @@
     </div>
     <div class="service-grid reveal">
       <div class="service-card">
-        <div class="s-icon">AI</div>
+        <div class="s-icon"><i class="bi bi-cpu-fill"></i></div>
         <h3>AI Solutions</h3>
         <ul>
           <li>AI Chatbots &amp; Agents</li>
@@ -418,7 +418,7 @@
         </ul>
       </div>
       <div class="service-card">
-        <div class="s-icon">SW</div>
+        <div class="s-icon"><i class="bi bi-window-sidebar"></i></div>
         <h3>Software Development</h3>
         <ul>
           <li>Business Websites &amp; Portals</li>
@@ -427,7 +427,7 @@
         </ul>
       </div>
       <div class="service-card">
-        <div class="s-icon">AP</div>
+        <div class="s-icon"><i class="bi bi-phone-fill"></i></div>
         <h3>Mobile Apps</h3>
         <ul>
           <li>Android &amp; iOS Apps</li>
@@ -436,7 +436,7 @@
         </ul>
       </div>
       <div class="service-card">
-        <div class="s-icon">DG</div>
+        <div class="s-icon"><i class="bi bi-graph-up-arrow"></i></div>
         <h3>Digital Growth</h3>
         <ul>
           <li>SEO &amp; Performance Marketing</li>
@@ -445,7 +445,7 @@
         </ul>
       </div>
       <div class="service-card">
-        <div class="s-icon">CL</div>
+        <div class="s-icon"><i class="bi bi-cloud-upload-fill"></i></div>
         <h3>Cloud &amp; DevOps</h3>
         <ul>
           <li>Cloud Hosting &amp; VPS</li>
@@ -454,7 +454,7 @@
         </ul>
       </div>
       <div class="service-card">
-        <div class="s-icon">ED</div>
+        <div class="s-icon"><i class="bi bi-mortarboard-fill"></i></div>
         <h3>Education &amp; Training</h3>
         <ul>
           <li>AI Workshops &amp; Bootcamps</li>
@@ -507,7 +507,7 @@
   <div class="wrap reveal">
     <div class="offer-card">
       <div>
-        <span class="offer-badge">🔥 SPECIAL PACKAGE</span>
+        <span class="offer-badge"><i class="bi bi-fire"></i> SPECIAL PACKAGE</span>
         <div class="offer-price">₹5,999</div>
         <p style="font-size:14px; color:var(--muted-light); margin-bottom:24px;">All-In-One Full Stack Web Package • Delivered in 30 Hours • Complete Source Code Shared</p>
         <button onclick="openModal()" class="btn btn-primary" style="width:100%;">Claim Offer &amp; Book Now</button>
@@ -520,7 +520,7 @@
         <div><i class="bi bi-check-circle-fill"></i> Full Stack Backend Connectivity</div>
         <div><i class="bi bi-check-circle-fill"></i> Admin Portal Included</div>
         <div><i class="bi bi-check-circle-fill"></i> Complete Source Code Shared</div>
-        <div><i class="bi bi-check-circle-fill"></i> ⚡ 30 Hours Delivery</div>
+        <div><i class="bi bi-check-circle-fill"></i> <i class="bi bi-lightning-charge-fill"></i> 30 Hours Delivery</div>
       </div>
     </div>
   </div>
@@ -581,8 +581,8 @@
   <div class="wrap reveal">
     <h2 class="display">Ready to build something intelligent?</h2>
     <div class="cta-row">
-      <button onclick="openModal()" class="btn btn-primary">Start Your Project</button>
-      <a href="mailto:alphatechplus2025@gmail.com" class="btn btn-ghost">Book a Free Consultation</a>
+      <button onclick="openModal()" class="btn btn-primary"><i class="bi bi-rocket-takeoff-fill"></i> Start Your Project</button>
+      <a href="mailto:alphatechplus2025@gmail.com" class="btn btn-ghost"><i class="bi bi-envelope"></i> Book a Free Consultation</a>
     </div>
   </div>
 </section>
@@ -602,16 +602,16 @@
     <div style="display:flex; align-items:center; gap:8px; font-weight:700; font-size:14px;">
       <i class="bi bi-robot" style="color:var(--accent);"></i> AlphaTech Assistant
     </div>
-    <button onclick="toggleChat()" style="background:none; border:none; color:var(--muted-light); cursor:pointer; font-size:16px;">✕</button>
+    <button onclick="toggleChat()" style="background:none; border:none; color:var(--muted-light); cursor:pointer; font-size:16px;"><i class="bi bi-x-lg"></i></button>
   </div>
   <div class="chat-body" id="chatBody">
     <div class="chat-bubble bot">
-      👋 Hello! Welcome to <b>Alpha Tech Plus</b>.<br>How can I assist you with your AI, web development, or college project today?
+      Hello! Welcome to <b>Alpha Tech Plus</b>.<br>How can I assist you with your AI, web development, or college project today?
     </div>
   </div>
   <div class="chat-footer">
     <input type="text" id="chatInput" placeholder="Type your message..." onkeydown="if(event.key==='Enter') sendChat()">
-    <button onclick="sendChat()" style="background:var(--accent); border:none; border-radius:6px; padding:0 12px; cursor:pointer; font-weight:700;">➔</button>
+    <button onclick="sendChat()" style="background:var(--accent); border:none; border-radius:6px; padding:0 12px; cursor:pointer; font-weight:700;"><i class="bi bi-send-fill"></i></button>
   </div>
 </div>
 
@@ -656,7 +656,7 @@
       </div>
       <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Submit Inquiry</button>
     </form>
-    <button onclick="closeModal()" style="position:absolute; top:20px; right:20px; background:none; border:none; color:var(--muted-light); cursor:pointer; font-size:18px;">✕</button>
+    <button onclick="closeModal()" style="position:absolute; top:20px; right:20px; background:none; border:none; color:var(--muted-light); cursor:pointer; font-size:18px;"><i class="bi bi-x-lg"></i></button>
   </div>
 </div>
 
@@ -719,11 +719,11 @@
       
       const q = text.toLowerCase();
       if(q.includes('5999') || q.includes('offer') || q.includes('package')){
-        reply = "🔥 Our <b>₹5,999 Package</b> includes Domain + Web Hosting + Full Source Code + 30-Hour Express Delivery!";
+        reply = "Our <b>₹5,999 Package</b> includes Domain + Web Hosting + Full Source Code + 30-Hour Express Delivery!";
       } else if(q.includes('ai') || q.includes('chatbot')){
-        reply = "🤖 <b>Alpha AI</b> provides AI Chatbots, Autonomous Agents, and Custom Automation engines.";
+        reply = "<b>Alpha AI</b> provides AI Chatbots, Autonomous Agents, and Custom Automation engines.";
       } else if(q.includes('college') || q.includes('project')){
-        reply = "🎓 We specialize in final year college projects (BCA/MCA/B.Tech) with 100% full source code and database scripts.";
+        reply = "We specialize in final year college projects (BCA/MCA/B.Tech) with 100% full source code and database scripts.";
       }
 
       botMsg.innerHTML = reply;
