@@ -47,7 +47,7 @@
     border-bottom:1px solid transparent;
   }
   .nav.scrolled{
-    background:rgba(10,10,14,.85);
+    background:rgba(10,10,14,.88);
     backdrop-filter: blur(14px) saturate(140%);
     -webkit-backdrop-filter: blur(14px) saturate(140%);
     padding:14px 0;
@@ -68,7 +68,7 @@
   .nav-links a:hover{color:var(--text-light);}
   .nav-cta{
     background:var(--accent); color:#08120E; font-weight:600; font-size:14px;
-    padding:10px 20px; border-radius:100px;
+    padding:10px 20px; border-radius:100px; cursor:pointer; border:none;
     transition: transform .2s ease, background .2s ease;
   }
   .nav-cta:hover{background:#17d391; transform:translateY(-1px);}
@@ -115,7 +115,7 @@
     display:inline-flex; align-items:center; gap:8px;
     padding:15px 28px; border-radius:100px; font-weight:600; font-size:15px;
     transition: transform .25s ease, background .25s ease, border-color .25s ease;
-    cursor:pointer; border:none;
+    cursor:pointer; border:none; text-decoration:none;
   }
   .btn-primary{background:var(--accent); color:#08120E;}
   .btn-primary:hover{background:#17d391; transform:translateY(-2px);}
@@ -140,7 +140,7 @@
   .section-head h2{font-size:clamp(30px, 3.8vw, 48px); font-weight:700; line-height:1.1;}
   .division-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;}
   .division-card{
-    background:var(--ink-soft); border:1px solid var(--ink-line); border-radius:16px; p-4; padding:36px 30px;
+    background:var(--ink-soft); border:1px solid var(--ink-line); border-radius:16px; padding:36px 30px;
     transition: transform .3s ease, border-color .3s ease;
   }
   .division-card:hover{transform:translateY(-4px); border-color:rgba(15,190,133,.4);}
@@ -181,10 +181,23 @@
   .service-card li{font-size:14px; color:var(--muted-light); padding:6px 0; border-top:1px solid var(--ink-line);}
   .service-card li:first-child{border-top:none;}
 
-  /* ---------- SPECIAL ₹5999 OFFER ---------- */
-  .offer-band{
-    background:var(--ink-soft); color:var(--text-light); border-y:1px solid var(--ink-line); padding:100px 0;
+  /* ---------- PORTFOLIO ---------- */
+  .portfolio{background:var(--paper); padding:130px 0;}
+  .portfolio-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:30px; margin-top:48px;}
+  .portfolio-card{
+    background:#FFF; border:1px solid var(--line-light); border-radius:18px; overflow:hidden;
+    transition:transform .3s ease, box-shadow .3s ease;
   }
+  .portfolio-card:hover{transform:translateY(-6px); box-shadow:0 20px 40px rgba(0,0,0,.06);}
+  .portfolio-thumb{height:200px; background:var(--ink-soft); overflow:hidden; position:relative;}
+  .portfolio-thumb img{width:100%; height:100%; object-fit:cover; opacity:0.9;}
+  .portfolio-body{padding:26px;}
+  .portfolio-tag{font-size:11px; font-weight:700; text-transform:uppercase; color:var(--accent-dark); margin-bottom:8px; display:block;}
+  .portfolio-body h3{font-size:18px; font-weight:700; margin-bottom:8px;}
+  .portfolio-body p{font-size:13.5px; color:var(--muted); line-height:1.5; margin-bottom:16px;}
+
+  /* ---------- SPECIAL ₹5999 OFFER ---------- */
+  .offer-band{background:var(--ink-soft); color:var(--text-light); border-y:1px solid var(--ink-line); padding:100px 0;}
   .offer-card{
     background:rgba(255,255,255,.02); border:1px solid var(--ink-line); border-radius:24px; padding:48px;
     display:grid; grid-template-columns:0.8fr 1.2fr; gap:48px; align-items:center;
@@ -196,18 +209,57 @@
   .offer-grid i{color:var(--accent);}
 
   /* ---------- TURNKEY SOLUTIONS ---------- */
-  .solutions{background:var(--paper); padding:130px 0;}
+  .solutions{background:var(--paper-alt); padding:130px 0;}
   .solutions-grid{display:grid; grid-template-columns:repeat(5, 1fr); gap:16px; margin-top:40px;}
   .solution-box{background:#FFF; border:1px solid var(--line-light); padding:24px 18px; border-radius:14px; text-align:center;}
   .solution-box i{font-size:24px; color:var(--accent-dark); margin-bottom:10px; display:block;}
   .solution-box span{font-size:13.5px; font-weight:700; color:var(--text-dark);}
 
+  /* ---------- FAQ ---------- */
+  .faq{background:var(--paper); padding:130px 0;}
+  .faq-list{max-width:800px; margin:48px auto 0; display:flex; flex-direction:column; gap:16px;}
+  .faq-item{background:#FFF; border:1px solid var(--line-light); border-radius:14px; padding:22px 26px; cursor:pointer;}
+  .faq-header{display:flex; justify-content:space-between; align-items:center; font-size:17px; font-weight:700;}
+  .faq-answer{font-size:14.5px; color:var(--muted); line-height:1.6; margin-top:14px; display:none;}
+  .faq-item.active .faq-answer{display:block;}
+
   /* ---------- CTA BAND ---------- */
-  .cta-band{background:var(--paper-alt); padding:110px 0; text-align:center;}
+  .cta-band{background:var(--ink); color:var(--text-light); padding:120px 0; text-align:center;}
   .cta-band h2{font-size:clamp(30px, 4vw, 48px); font-weight:700; margin-bottom:30px; max-width:700px; margin-inline:auto;}
   .cta-band .cta-row{justify-content:center;}
-  .cta-band .btn-ghost{border-color:var(--line-light); color:var(--text-dark);}
-  .cta-band .btn-ghost:hover{border-color:#0B0B0F;}
+
+  /* ---------- FLOATING ACTIONS & AI CHAT ---------- */
+  .floating-wa{
+    position:fixed; bottom:28px; left:28px; z-index:99;
+    width:52px; height:52px; border-radius:50%; background:#25D366; color:#FFF;
+    display:flex; align-items:center; justify-content:center; font-size:24px;
+    box-shadow:0 10px 25px rgba(37,211,102,.4); transition:transform .3s ease;
+  }
+  .floating-wa:hover{transform:scale(1.1);}
+
+  .chatbot-toggle{
+    position:fixed; bottom:28px; right:28px; z-index:99;
+    width:56px; height:56px; border-radius:50%; background:var(--accent); color:#08120E;
+    display:flex; align-items:center; justify-content:center; font-size:24px; cursor:pointer;
+    box-shadow:0 10px 25px rgba(15,190,133,.4); border:none; transition:transform .3s ease;
+  }
+  .chatbot-toggle:hover{transform:scale(1.08);}
+
+  .chatbot-drawer{
+    position:fixed; bottom:96px; right:28px; z-index:100;
+    width:350px; max-width:calc(100vw - 40px); height:460px;
+    background:var(--ink-soft); border:1px solid var(--ink-line); border-radius:20px;
+    box-shadow:0 20px 50px rgba(0,0,0,.6); display:flex; flex-direction:column; overflow:hidden;
+    opacity:0; visibility:hidden; transform:translateY(20px); transition:all .3s ease;
+  }
+  .chatbot-drawer.active{opacity:1; visibility:visible; transform:translateY(0);}
+  .chat-head{background:var(--ink); padding:16px 20px; border-b:1px solid var(--ink-line); display:flex; align-items:center; justify-content:space-between; color:var(--text-light);}
+  .chat-body{flex:1; padding:16px; overflow-y:auto; display:flex; flex-direction:column; gap:12px; font-size:13.5px;}
+  .chat-bubble{padding:10px 14px; border-radius:12px; max-width:85%; line-height:1.45;}
+  .chat-bubble.bot{background:var(--ink); color:var(--text-light); align-self:flex-start; border:1px solid var(--ink-line);}
+  .chat-bubble.user{background:var(--accent); color:#08120E; font-weight:600; align-self:flex-end;}
+  .chat-footer{padding:10px; background:var(--ink); border-t:1px solid var(--ink-line); display:flex; gap:8px;}
+  .chat-footer input{flex:1; background:var(--ink-soft); border:1px solid var(--ink-line); border-radius:8px; padding:8px 12px; color:var(--text-light); font-size:13px; outline:none;}
 
   /* ---------- MODAL ---------- */
   .modal-overlay{
@@ -244,7 +296,7 @@
     .about-grid{grid-template-columns:1fr; gap:36px;}
     .about-left h2{position:static;}
     .values-row{grid-template-columns:repeat(2,1fr);}
-    .service-grid, .division-grid{grid-template-columns:1fr;}
+    .service-grid, .division-grid, .portfolio-grid{grid-template-columns:1fr;}
     .offer-card{grid-template-columns:1fr; gap:24px; padding:28px;}
     .solutions-grid{grid-template-columns:repeat(2,1fr);}
     .wrap{padding:0 22px;}
@@ -267,7 +319,8 @@
       <li><a href="#divisions">Ecosystem</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
-      <li><a href="#solutions">Solutions</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button onclick="openModal()" class="nav-cta">Start Your Project</button>
@@ -413,6 +466,42 @@
   </div>
 </section>
 
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="wrap">
+    <div class="section-head reveal" style="text-align:center;">
+      <div class="about-eyebrow" style="justify-content:center;">Our Portfolio</div>
+      <h2 class="display">Recent Project Highlights</h2>
+    </div>
+    <div class="portfolio-grid reveal">
+      <div class="portfolio-card">
+        <div class="portfolio-thumb"><img src="assets/images/project1.jpg" alt="College ERP"></div>
+        <div class="portfolio-body">
+          <span class="portfolio-tag">Software Engineering</span>
+          <h3>College Management System</h3>
+          <p>Complete admin and student dashboard with real-time academic reporting and database management.</p>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="portfolio-thumb"><img src="assets/images/project2.jpg" alt="AI Assistant"></div>
+        <div class="portfolio-body">
+          <span class="portfolio-tag">AI Solutions</span>
+          <h3>AI Business Assistant</h3>
+          <p>Smart NLP assistant dashboard with customer support automation and query resolution analytics.</p>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="portfolio-thumb"><img src="assets/images/project3.jpg" alt="E-Commerce Store"></div>
+        <div class="portfolio-body">
+          <span class="portfolio-tag">E-Commerce</span>
+          <h3>Online Shopping Platform</h3>
+          <p>Fully responsive storefront with product catalog, cart, and instant online payment gateway connectivity.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SPECIAL ₹5999 OFFER PACKAGE -->
 <section class="offer-band">
   <div class="wrap reveal">
@@ -441,7 +530,7 @@
 <section class="solutions" id="solutions">
   <div class="wrap">
     <div class="section-head reveal" style="text-align:center;">
-      <div class="eyebrow" style="justify-content:center;">Turnkey Digital Solutions</div>
+      <div class="about-eyebrow" style="justify-content:center;">Turnkey Digital Solutions</div>
       <h2 class="display">Systems We Build &amp; Deploy</h2>
     </div>
     <div class="solutions-grid reveal">
@@ -450,6 +539,39 @@
       <div class="solution-box"><i class="bi bi-hospital"></i><span>Hospital Management</span></div>
       <div class="solution-box"><i class="bi bi-people"></i><span>HR &amp; Payroll Systems</span></div>
       <div class="solution-box"><i class="bi bi-cart3"></i><span>E-Commerce Stores</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head reveal" style="text-align:center;">
+      <div class="about-eyebrow" style="justify-content:center;">FAQ</div>
+      <h2 class="display">Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-header">
+          <span>Are you a web agency or a long-term technology partner?</span>
+          <i class="bi bi-chevron-down"></i>
+        </div>
+        <div class="faq-answer">We are an AI, Software &amp; Technology Growth Partner. We help organizations build complete digital ecosystems, automate operations, and scale sustainably.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-header">
+          <span>How fast is your ₹5,999 special startup package delivered?</span>
+          <i class="bi bi-chevron-down"></i>
+        </div>
+        <div class="faq-answer">Delivery is completed within 30 Hours with domain, web hosting, WhatsApp integration, and 100% full source code ownership.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-header">
+          <span>Do you offer student workshops and internship programs?</span>
+          <i class="bi bi-chevron-down"></i>
+        </div>
+        <div class="faq-answer">Yes! Through Alpha Academy, we conduct practical AI workshops, faculty development programs, internships, and project mentorship.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -465,6 +587,34 @@
   </div>
 </section>
 
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/919876543210?text=Hello%20AlphaTech!%20I'm%20interested%20in%20starting%20a%20project." target="_blank" class="floating-wa" title="Chat on WhatsApp">
+  <i class="bi bi-whatsapp"></i>
+</a>
+
+<!-- AI CHATBOT WIDGET -->
+<button class="chatbot-toggle" id="chatToggle" title="Ask AI Assistant">
+  <i class="bi bi-chat-dots-fill"></i>
+</button>
+
+<div class="chatbot-drawer" id="chatDrawer">
+  <div class="chat-head">
+    <div style="display:flex; align-items:center; gap:8px; font-weight:700; font-size:14px;">
+      <i class="bi bi-robot" style="color:var(--accent);"></i> AlphaTech Assistant
+    </div>
+    <button onclick="toggleChat()" style="background:none; border:none; color:var(--muted-light); cursor:pointer; font-size:16px;">✕</button>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="chat-bubble bot">
+      👋 Hello! Welcome to <b>Alpha Tech Plus</b>.<br>How can I assist you with your AI, web development, or college project today?
+    </div>
+  </div>
+  <div class="chat-footer">
+    <input type="text" id="chatInput" placeholder="Type your message..." onkeydown="if(event.key==='Enter') sendChat()">
+    <button onclick="sendChat()" style="background:var(--accent); border:none; border-radius:6px; padding:0 12px; cursor:pointer; font-weight:700;">➔</button>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
@@ -474,8 +624,9 @@
         <li><a href="#divisions">Ecosystem</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
-        <li><a href="#solutions">Solutions</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="https://github.com/alphatechplus2025/alphatech-" target="_blank"><i class="bi bi-github"></i> GitHub</a></li>
       </ul>
     </div>
     <div class="foot-bottom">
@@ -531,9 +682,55 @@
   modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
   document.getElementById('projectForm').addEventListener('submit', (e) => {
     e.preventDefault();
-    alert('Thank you! Your project inquiry has been submitted.');
+    alert('Thank you! Your project inquiry has been submitted. Our team will contact you on WhatsApp.');
     closeModal();
   });
+
+  /* ---------- FAQ ACCORDION ---------- */
+  function toggleFaq(item){
+    item.classList.toggle('active');
+  }
+
+  /* ---------- AI CHATBOT ---------- */
+  const chatDrawer = document.getElementById('chatDrawer');
+  const chatToggle = document.getElementById('chatToggle');
+  const chatBody = document.getElementById('chatBody');
+  const chatInput = document.getElementById('chatInput');
+
+  chatToggle.addEventListener('click', toggleChat);
+  function toggleChat(){
+    chatDrawer.classList.toggle('active');
+  }
+
+  function sendChat(){
+    const text = chatInput.value.trim();
+    if(!text) return;
+    
+    const userMsg = document.createElement('div');
+    userMsg.className = 'chat-bubble user';
+    userMsg.textContent = text;
+    chatBody.appendChild(userMsg);
+    chatInput.value = '';
+
+    setTimeout(() => {
+      const botMsg = document.createElement('div');
+      botMsg.className = 'chat-bubble bot';
+      let reply = "Thanks for asking! You can reach us at <b>alphatechplus2025@gmail.com</b> or on WhatsApp at <b>+91 98765 43210</b> for instant response.";
+      
+      const q = text.toLowerCase();
+      if(q.includes('5999') || q.includes('offer') || q.includes('package')){
+        reply = "🔥 Our <b>₹5,999 Package</b> includes Domain + Web Hosting + Full Source Code + 30-Hour Express Delivery!";
+      } else if(q.includes('ai') || q.includes('chatbot')){
+        reply = "🤖 <b>Alpha AI</b> provides AI Chatbots, Autonomous Agents, and Custom Automation engines.";
+      } else if(q.includes('college') || q.includes('project')){
+        reply = "🎓 We specialize in final year college projects (BCA/MCA/B.Tech) with 100% full source code and database scripts.";
+      }
+
+      botMsg.innerHTML = reply;
+      chatBody.appendChild(botMsg);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }, 600);
+  }
 
   /* ---------- 3D HERO: BUILDING BLOCKS ---------- */
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
