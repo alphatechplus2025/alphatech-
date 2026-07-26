@@ -190,7 +190,7 @@
   }
   .portfolio-card:hover{transform:translateY(-6px); box-shadow:0 20px 40px rgba(0,0,0,.06);}
   .portfolio-thumb{height:200px; background:var(--ink-soft); overflow:hidden; position:relative;}
-  .portfolio-thumb img{width:100%; height:100%; object-fit:cover; opacity:0.9;}
+  .portfolio-thumb img{width:100%; height:100%; object-fit:cover; opacity:0.95;}
   .portfolio-body{padding:26px;}
   .portfolio-tag{font-size:11px; font-weight:700; text-transform:uppercase; color:var(--accent-dark); margin-bottom:8px; display:block;}
   .portfolio-body h3{font-size:18px; font-weight:700; margin-bottom:8px;}
@@ -233,7 +233,7 @@
     position:fixed; bottom:28px; left:28px; z-index:99;
     width:52px; height:52px; border-radius:50%; background:#25D366; color:#FFF;
     display:flex; align-items:center; justify-content:center; font-size:24px;
-    box-shadow:0 10px 25px rgba(37,211,102,.4); transition:transform .3s ease;
+    box-shadow:0 10px 25px rgba(37,211,102,.4); transition:transform .3s ease; text-decoration:none;
   }
   .floating-wa:hover{transform:scale(1.1);}
 
@@ -247,7 +247,7 @@
 
   .chatbot-drawer{
     position:fixed; bottom:96px; right:28px; z-index:100;
-    width:350px; max-width:calc(100vw - 40px); height:460px;
+    width:360px; max-width:calc(100vw - 40px); height:490px;
     background:var(--ink-soft); border:1px solid var(--ink-line); border-radius:20px;
     box-shadow:0 20px 50px rgba(0,0,0,.6); display:flex; flex-direction:column; overflow:hidden;
     opacity:0; visibility:hidden; transform:translateY(20px); transition:all .3s ease;
@@ -255,9 +255,25 @@
   .chatbot-drawer.active{opacity:1; visibility:visible; transform:translateY(0);}
   .chat-head{background:var(--ink); padding:16px 20px; border-b:1px solid var(--ink-line); display:flex; align-items:center; justify-content:space-between; color:var(--text-light);}
   .chat-body{flex:1; padding:16px; overflow-y:auto; display:flex; flex-direction:column; gap:12px; font-size:13.5px;}
-  .chat-bubble{padding:10px 14px; border-radius:12px; max-width:85%; line-height:1.45;}
+  .chat-bubble{padding:10px 14px; border-radius:12px; max-width:88%; line-height:1.45;}
   .chat-bubble.bot{background:var(--ink); color:var(--text-light); align-self:flex-start; border:1px solid var(--ink-line);}
   .chat-bubble.user{background:var(--accent); color:#08120E; font-weight:600; align-self:flex-end;}
+  
+  .chat-chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;}
+  .chip-btn{
+    background:rgba(15,190,133,.12); border:1px solid rgba(15,190,133,.3); color:var(--accent);
+    padding:5px 11px; border-radius:100px; font-size:11.5px; font-weight:600; cursor:pointer;
+    transition:all .2s ease;
+  }
+  .chip-btn:hover{background:var(--accent); color:#08120E;}
+
+  .chat-cta-btn{
+    display:inline-flex; align-items:center; gap:6px; margin-top:8px; padding:6px 14px;
+    background:var(--accent); color:#08120E; font-weight:700; font-size:12px; border-radius:100px;
+    text-decoration:none; transition:background .2s ease;
+  }
+  .chat-cta-btn:hover{background:#17d391;}
+
   .chat-footer{padding:10px; background:var(--ink); border-t:1px solid var(--ink-line); display:flex; gap:8px;}
   .chat-footer input{flex:1; background:var(--ink-soft); border:1px solid var(--ink-line); border-radius:8px; padding:8px 12px; color:var(--text-light); font-size:13px; outline:none;}
 
@@ -336,7 +352,7 @@
     <p class="sub">We partner with startups, businesses, and educational institutions to build digital solutions, automate operations, and accelerate sustainable growth.</p>
     <div class="cta-row">
       <button onclick="openModal()" class="btn btn-primary"><i class="bi bi-rocket-takeoff-fill"></i> Start Your Project</button>
-      <a href="#contact" class="btn btn-ghost"><i class="bi bi-calendar-event"></i> Book a Free Consultation</a>
+      <a href="https://wa.me/919042115140" target="_blank" class="btn btn-ghost"><i class="bi bi-whatsapp"></i> Chat on WhatsApp</a>
     </div>
   </div>
   <div class="scroll-cue"><div class="line"></div>Scroll</div>
@@ -582,13 +598,13 @@
     <h2 class="display">Ready to build something intelligent?</h2>
     <div class="cta-row">
       <button onclick="openModal()" class="btn btn-primary"><i class="bi bi-rocket-takeoff-fill"></i> Start Your Project</button>
-      <a href="mailto:alphatechplus2025@gmail.com" class="btn btn-ghost"><i class="bi bi-envelope"></i> Book a Free Consultation</a>
+      <a href="https://wa.me/919042115140" target="_blank" class="btn btn-ghost"><i class="bi bi-whatsapp"></i> Chat on WhatsApp</a>
     </div>
   </div>
 </section>
 
 <!-- FLOATING WHATSAPP -->
-<a href="https://wa.me/919876543210?text=Hello%20AlphaTech!%20I'm%20interested%20in%20starting%20a%20project." target="_blank" class="floating-wa" title="Chat on WhatsApp">
+<a href="https://wa.me/919042115140?text=Hello%20AlphaTech!%20I'm%20interested%20in%20starting%20a%20project." target="_blank" class="floating-wa" title="Chat on WhatsApp">
   <i class="bi bi-whatsapp"></i>
 </a>
 
@@ -607,6 +623,12 @@
   <div class="chat-body" id="chatBody">
     <div class="chat-bubble bot">
       Hello! Welcome to <b>Alpha Tech Plus</b>.<br>How can I assist you with your AI, web development, or college project today?
+      <div class="chat-chips">
+        <button class="chip-btn" onclick="sendQuickChat('₹5,999 Offer Package')">🔥 ₹5,999 Package</button>
+        <button class="chip-btn" onclick="sendQuickChat('Alpha AI Services')">🤖 Alpha AI</button>
+        <button class="chip-btn" onclick="sendQuickChat('College Projects')">🎓 College Projects</button>
+        <button class="chip-btn" onclick="sendQuickChat('Contact Info')">📞 Phone &amp; WhatsApp</button>
+      </div>
     </div>
   </div>
   <div class="chat-footer">
@@ -626,12 +648,13 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#portfolio">Portfolio</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="https://wa.me/919042115140" target="_blank"><i class="bi bi-whatsapp"></i> +91 90421 15140</a></li>
         <li><a href="https://github.com/alphatechplus2025/alphatech-" target="_blank"><i class="bi bi-github"></i> GitHub</a></li>
       </ul>
     </div>
     <div class="foot-bottom">
       <span>© 2026 Alpha Tech Plus. Building intelligent businesses for tomorrow.</span>
-      <span>alphatechplus2025@gmail.com</span>
+      <span>alphatechplus2025@gmail.com | +91 90421 15140</span>
     </div>
   </div>
 </footer>
@@ -640,7 +663,7 @@
 <div class="modal-overlay" id="modal">
   <div class="modal-box">
     <h3>Start Your Project</h3>
-    <p>Tell us about your project requirements and we will contact you on WhatsApp.</p>
+    <p>Tell us about your project requirements and we will contact you on WhatsApp (+91 90421 15140).</p>
     <form id="projectForm">
       <div class="form-group">
         <label>Full Name</label>
@@ -648,7 +671,7 @@
       </div>
       <div class="form-group">
         <label>WhatsApp Phone</label>
-        <input type="tel" placeholder="+91 98765 43210" required>
+        <input type="tel" placeholder="+91 90421 15140" required>
       </div>
       <div class="form-group">
         <label>Project Details</label>
@@ -682,7 +705,7 @@
   modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
   document.getElementById('projectForm').addEventListener('submit', (e) => {
     e.preventDefault();
-    alert('Thank you! Your project inquiry has been submitted. Our team will contact you on WhatsApp.');
+    alert('Thank you! Your project inquiry has been submitted. Our team will contact you on WhatsApp at +91 90421 15140.');
     closeModal();
   });
 
@@ -691,7 +714,7 @@
     item.classList.toggle('active');
   }
 
-  /* ---------- AI CHATBOT ---------- */
+  /* ---------- ENHANCED AI CHATBOT ---------- */
   const chatDrawer = document.getElementById('chatDrawer');
   const chatToggle = document.getElementById('chatToggle');
   const chatBody = document.getElementById('chatBody');
@@ -700,6 +723,11 @@
   chatToggle.addEventListener('click', toggleChat);
   function toggleChat(){
     chatDrawer.classList.toggle('active');
+  }
+
+  function sendQuickChat(queryText){
+    chatInput.value = queryText;
+    sendChat();
   }
 
   function sendChat(){
@@ -715,21 +743,27 @@
     setTimeout(() => {
       const botMsg = document.createElement('div');
       botMsg.className = 'chat-bubble bot';
-      let reply = "Thanks for asking! You can reach us at <b>alphatechplus2025@gmail.com</b> or on WhatsApp at <b>+91 98765 43210</b> for instant response.";
+      let reply = "";
       
       const q = text.toLowerCase();
-      if(q.includes('5999') || q.includes('offer') || q.includes('package')){
-        reply = "Our <b>₹5,999 Package</b> includes Domain + Web Hosting + Full Source Code + 30-Hour Express Delivery!";
-      } else if(q.includes('ai') || q.includes('chatbot')){
-        reply = "<b>Alpha AI</b> provides AI Chatbots, Autonomous Agents, and Custom Automation engines.";
-      } else if(q.includes('college') || q.includes('project')){
-        reply = "We specialize in final year college projects (BCA/MCA/B.Tech) with 100% full source code and database scripts.";
+      if(q.includes('5999') || q.includes('offer') || q.includes('package') || q.includes('price') || q.includes('cost')){
+        reply = "Our <b>₹5,999 Special Package</b> includes Domain + Hosting + Admin Portal + 100% Full Source Code + WhatsApp Integration, delivered in just 30 Hours!<br><a href='https://wa.me/919042115140?text=I%20want%20to%20book%20the%205999%20package' target='_blank' class='chat-cta-btn'><i class='bi bi-whatsapp'></i> Claim ₹5,999 Package</a>";
+      } else if(q.includes('ai') || q.includes('chatbot') || q.includes('automation') || q.includes('agent')){
+        reply = "<b>Alpha AI</b> specializes in custom AI chatbots, autonomous workflow agents, and LLM integrations (Gemini / OpenAI) tailored for your business.<br><a href='https://wa.me/919042115140?text=Interested%20in%20Alpha%20AI%20solutions' target='_blank' class='chat-cta-btn'><i class='bi bi-cpu'></i> Discuss AI Solutions</a>";
+      } else if(q.includes('college') || q.includes('student') || q.includes('project') || q.includes('bca') || q.includes('mca') || q.includes('btech')){
+        reply = "We specialize in final-year college projects (BCA/MCA/B.Tech) with 100% complete source code, database scripts, PPT, documentation, and live demo setup.<br><a href='https://wa.me/919042115140?text=Need%20College%20Project%20help' target='_blank' class='chat-cta-btn'><i class='bi bi-mortarboard'></i> Get Project Help</a>";
+      } else if(q.includes('phone') || q.includes('number') || q.includes('contact') || q.includes('call') || q.includes('whatsapp') || q.includes('email')){
+        reply = "You can reach us directly:<br>📞 <b>Phone / WhatsApp:</b> +91 90421 15140<br>📧 <b>Email:</b> alphatechplus2025@gmail.com<br>📍 <b>Location:</b> Chennai, Tamil Nadu<br><a href='https://wa.me/919042115140' target='_blank' class='chat-cta-btn'><i class='bi bi-whatsapp'></i> Chat Now</a>";
+      } else if(q.includes('website') || q.includes('app') || q.includes('service') || q.includes('erp') || q.includes('crm') || q.includes('business')){
+        reply = "We build high-converting websites, mobile apps (Flutter/React Native), ERP/CRM platforms, and e-commerce stores with full source code ownership.<br><a href='javascript:void(0)' onclick='openModal()' class='chat-cta-btn'><i class='bi bi-rocket-takeoff'></i> Start Your Project</a>";
+      } else {
+        reply = "Thanks for asking! Our lead team is available instantly on WhatsApp at <b>+91 90421 15140</b> or via email at <b>alphatechplus2025@gmail.com</b>.<br><a href='https://wa.me/919042115140' target='_blank' class='chat-cta-btn'><i class='bi bi-whatsapp'></i> Chat on WhatsApp</a>";
       }
 
       botMsg.innerHTML = reply;
       chatBody.appendChild(botMsg);
       chatBody.scrollTop = chatBody.scrollHeight;
-    }, 600);
+    }, 500);
   }
 
   /* ---------- 3D HERO: BUILDING BLOCKS ---------- */
