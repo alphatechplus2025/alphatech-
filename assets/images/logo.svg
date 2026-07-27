@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%" style="aspect-ratio: 1/1;">
+  <rect width="512" height="512" rx="96" fill="#121318"/>
+  <g fill="#0FBE85">
+    <!-- Left diagonal leg -->
+    <path d="M 102 370 L 212 110 L 252 110 L 142 370 Z"/>
+    <!-- Right diagonal leg with parallel cut gap -->
+    <path d="M 268 110 L 410 370 L 370 370 L 244 160 Z"/>
+    <!-- Plus symbol in center -->
+    <path d="M 232 220 H 280 V 266 H 332 V 314 H 280 V 370 H 232 V 314 H 180 V 266 H 232 Z"/>
+  </g>
+</svg>
