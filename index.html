@@ -315,16 +315,86 @@
   .foot-bottom{display:flex; justify-content:space-between; font-size:12.5px; color:#5C5C63; flex-wrap:wrap; gap:10px;}
 
   /* ---------- RESPONSIVE ---------- */
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 101;
+    transition: transform 0.3s ease;
+  }
+  .nav-toggle:focus { outline: none; }
+  .nav-toggle.active {
+    transform: rotate(90deg);
+  }
+
   @media (max-width: 860px){
-    .nav-links{display:none;}
-    .about-grid{grid-template-columns:1fr; gap:36px;}
-    .about-left h2{position:static;}
-    .values-row{grid-template-columns:repeat(2,1fr);}
-    .service-grid, .division-grid, .portfolio-grid{grid-template-columns:1fr;}
-    .offer-card{grid-template-columns:1fr; gap:24px; padding:28px;}
-    .solutions-grid{grid-template-columns:repeat(2,1fr);}
-    .wrap{padding:0 22px;}
-    .hero h1{max-width:100%;}
+    .nav-toggle { display: block; }
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 290px;
+      max-width: 80%;
+      height: 100vh;
+      background: rgba(10, 10, 14, 0.98);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      padding: 100px 40px;
+      gap: 28px;
+      border-left: 1px solid var(--ink-line);
+      transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 99;
+    }
+    .nav-links.active { right: 0; }
+    .nav-links a { font-size: 18px; font-weight: 600; }
+    .about-grid { grid-template-columns: 1fr; gap: 36px; }
+    .about-left h2 { position: static; }
+    .values-row { grid-template-columns: repeat(2, 1fr); }
+    .values-row .value-item:last-child { grid-column: span 2; }
+    .service-grid, .division-grid, .portfolio-grid { grid-template-columns: 1fr; }
+    .offer-card { grid-template-columns: 1fr; gap: 24px; padding: 28px; }
+    .solutions-grid { grid-template-columns: repeat(2, 1fr); }
+    .solutions-grid .solution-box:last-child { grid-column: span 2; }
+    .wrap { padding: 0 22px; }
+    .hero h1 { max-width: 100%; }
+    
+    .floating-wa {
+      width: 46px;
+      height: 46px;
+      font-size: 22px;
+      bottom: 20px;
+      left: 20px;
+    }
+    .chatbot-toggle {
+      width: 46px;
+      height: 46px;
+      font-size: 22px;
+      bottom: 20px;
+      right: 20px;
+    }
+    .chatbot-drawer {
+      bottom: 80px;
+      right: 20px;
+      width: calc(100vw - 40px);
+      height: 420px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .offer-grid { grid-template-columns: 1fr; }
+    .values-row { grid-template-columns: 1fr; }
+    .values-row .value-item:last-child { grid-column: span 1; }
+    .solutions-grid { grid-template-columns: 1fr; }
+    .solutions-grid .solution-box:last-child { grid-column: span 1; }
+    .cta-row { flex-direction: column; width: 100%; }
+    .cta-row .btn { width: 100%; justify-content: center; }
+    .logo { font-size: 18px; }
+    .nav-cta { padding: 8px 16px; font-size: 13px; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -338,8 +408,8 @@
 <!-- NAVIGATION -->
 <nav class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a href="#" class="logo"><img src="assets/images/logo.svg" alt="AlphaTech+" class="logo-img">AlphaTech+</a>
-    <ul class="nav-links">
+    <a href="#" class="logo"><img src="assets/images/logo.png" alt="AlphaTech+" class="logo-img">AlphaTech+</a>
+    <ul class="nav-links" id="nav-links">
       <li><a href="#divisions">Ecosystem</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
@@ -347,7 +417,12 @@
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button onclick="openModal()" class="nav-cta">Start Your Project</button>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <button onclick="openModal()" class="nav-cta">Start Your Project</button>
+      <button class="nav-toggle" id="nav-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
   </div>
 </nav>
 
@@ -673,7 +748,7 @@
 <footer>
   <div class="wrap">
     <div class="foot-top">
-      <a href="#" class="logo"><img src="assets/images/logo.svg" alt="AlphaTech+" class="logo-img">AlphaTech+</a>
+      <a href="#" class="logo"><img src="assets/images/logo.png" alt="AlphaTech+" class="logo-img">AlphaTech+</a>
       <ul class="foot-links">
         <li><a href="#divisions">Ecosystem</a></li>
         <li><a href="#about">About</a></li>
@@ -721,6 +796,34 @@
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  /* ---------- MOBILE MENU ---------- */
+  const navToggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+
+  function toggleMobileMenu() {
+    navToggle.classList.toggle('active');
+    navLinks.classList.toggle('active');
+    
+    const icon = navToggle.querySelector('i');
+    if (navToggle.classList.contains('active')) {
+      icon.className = 'bi bi-x-lg';
+      document.body.style.overflow = 'hidden';
+    } else {
+      icon.className = 'bi bi-list';
+      document.body.style.overflow = '';
+    }
+  }
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navToggle.classList.remove('active');
+      navLinks.classList.remove('active');
+      const icon = navToggle.querySelector('i');
+      icon.className = 'bi bi-list';
+      document.body.style.overflow = '';
+    });
   });
 
   /* ---------- SCROLL REVEAL ---------- */
