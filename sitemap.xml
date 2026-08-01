@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Main Homepage -->
+  <url>
+    <loc>https://alphatechplus.com/</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://alphatechplus.com/assets/images/logo.png</image:loc>
+      <image:title>Alpha Tech Plus Logo</image:title>
+    </image:image>
+  </url>
+
+  <!-- Strategic Divisions / Ecosystem Section -->
+  <url>
+    <loc>https://alphatechplus.com/#divisions</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- About Section -->
+  <url>
+    <loc>https://alphatechplus.com/#about</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Services Section -->
+  <url>
+    <loc>https://alphatechplus.com/#services</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Portfolio Case Studies Section -->
+  <url>
+    <loc>https://alphatechplus.com/#portfolio</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://alphatechplus.com/assets/images/project-reliefmind.png</image:loc>
+      <image:title>ReliefMind Triage AI Healthcare</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://alphatechplus.com/assets/images/project-myhealth.png</image:loc>
+      <image:title>MyHealth Plus AI Health Analyzer</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://alphatechplus.com/assets/images/project-eduvoice.png</image:loc>
+      <image:title>EduVoice AI Multilingual Voice Counselor</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://alphatechplus.com/assets/images/project-flyggo.png</image:loc>
+      <image:title>Flyggo Bus Booking Platform</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://alphatechplus.com/assets/images/project-college-crm.png</image:loc>
+      <image:title>College CRM Institutional ERP</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://alphatechplus.com/assets/images/project-workconnect.png</image:loc>
+      <image:title>WorkConnect Local Service Marketplace</image:title>
+    </image:image>
+  </url>
+
+  <!-- Launch Package Offer Section -->
+  <url>
+    <loc>https://alphatechplus.com/#offer-band</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- FAQ Section -->
+  <url>
+    <loc>https://alphatechplus.com/#faq</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Contact Section -->
+  <url>
+    <loc>https://alphatechplus.com/#contact</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>

@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+Allow: /assets/
+Disallow: /Alphatech/
+
+# Host & Sitemap Location
+Host: https://alphatechplus.com
+Sitemap: https://alphatechplus.com/sitemap.xml
