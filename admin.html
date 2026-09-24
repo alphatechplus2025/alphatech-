@@ -3,692 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AlphaTech+ CRM | Lead Management Dashboard</title>
+  <title>AlphaTech+ CRM | Lead Management & Projects CMS</title>
   <link rel="icon" type="image/png" href="assets/images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <style>
-    :root {
-      --bg: #0B0E14;
-      --sidebar: #0F131D;
-      --card: #151A26;
-      --card-hover: #1C2333;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-focus: #0FBE85;
-      --accent: #0FBE85;
-      --accent-light: rgba(15, 190, 133, 0.15);
-      --teal: #00B4D8;
-      --text: #F3F4F6;
-      --text-muted: #9CA3AF;
-      --text-dim: #6B7280;
-      --status-new: #3B82F6;
-      --status-contacted: #F59E0B;
-      --status-discussion: #8B5CF6;
-      --status-won: #10B981;
-      --status-lost: #EF4444;
-      --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font);
-      min-height: 100vh;
-      display: flex;
-      overflow-x: hidden;
-    }
-
-    /* PASSCODE LOCK OVERLAY */
-    #lockScreen {
-      position: fixed;
-      inset: 0;
-      background: rgba(11, 14, 20, 0.95);
-      backdrop-filter: blur(16px);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .lock-box {
-      background: var(--sidebar);
-      border: 1px solid var(--border);
-      padding: 40px;
-      border-radius: 20px;
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
-    }
-    .lock-icon {
-      width: 56px;
-      height: 56px;
-      background: var(--accent-light);
-      color: var(--accent);
-      border-radius: 16px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      margin-bottom: 20px;
-    }
-    .lock-box h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
-    .lock-box p { font-size: 13.5px; color: var(--text-muted); margin-bottom: 24px; }
-    .lock-input {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px;
-      color: #fff;
-      font-size: 16px;
-      letter-spacing: 2px;
-      text-align: center;
-      outline: none;
-      margin-bottom: 16px;
-      font-family: var(--font-mono);
-    }
-    .lock-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(15,190,133,0.2); }
-    .btn-unlock {
-      width: 100%;
-      background: var(--accent);
-      color: #0B0E14;
-      font-weight: 700;
-      border: none;
-      padding: 14px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 15px;
-      transition: all 0.2s;
-    }
-    .btn-unlock:hover { background: #13d494; transform: translateY(-1px); }
-
-    /* CRM LAYOUT */
-    .sidebar {
-      width: 250px;
-      background: var(--sidebar);
-      border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      z-index: 50;
-    }
-    .brand-area {
-      padding: 24px 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-    .brand-logo {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--accent), var(--teal));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      color: #0B0E14;
-      font-size: 16px;
-    }
-    .brand-info h1 { font-size: 16px; font-weight: 700; line-height: 1.2; }
-    .brand-info span { font-size: 11px; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-
-    .nav-menu { padding: 18px 12px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 11px 14px;
-      border-radius: 10px;
-      color: var(--text-muted);
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-decoration: none;
-    }
-    .nav-item i { font-size: 17px; }
-    .nav-item:hover, .nav-item.active {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.05);
-    }
-    .nav-item.active {
-      color: var(--accent);
-      background: var(--accent-light);
-    }
-    .nav-badge {
-      margin-left: auto;
-      background: rgba(15,190,133,0.2);
-      color: var(--accent);
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 100px;
-      font-weight: 700;
-      font-family: var(--font-mono);
-    }
-
-    .sidebar-footer {
-      padding: 16px 20px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 13px;
-    }
-    .live-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      color: var(--accent);
-      font-weight: 600;
-    }
-    .pulse-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--accent);
-      border-radius: 50%;
-      box-shadow: 0 0 0 0 rgba(15,190,133,0.7);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(15,190,133,0.7); }
-      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(15,190,133,0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(15,190,133,0); }
-    }
-
-    /* MAIN CONTENT */
-    .main-wrapper {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-      overflow-y: auto;
-    }
-
-    /* TOP BAR */
-    .topbar {
-      height: 70px;
-      background: var(--sidebar);
-      border-bottom: 1px solid var(--border);
-      padding: 0 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      position: sticky;
-      top: 0;
-      z-index: 40;
-    }
-    .search-box {
-      position: relative;
-      width: 380px;
-    }
-    .search-box i {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-dim);
-      font-size: 15px;
-    }
-    .search-input {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 10px 14px 10px 38px;
-      color: var(--text);
-      font-size: 13.5px;
-      outline: none;
-      transition: all 0.2s;
-    }
-    .search-input:focus { border-color: var(--accent); }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .btn-action {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 9px 15px;
-      border-radius: 9px;
-      font-size: 13px;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-action:hover { background: rgba(255, 255, 255, 0.1); }
-    .btn-action.primary {
-      background: var(--accent);
-      color: #0B0E14;
-      border: none;
-    }
-    .btn-action.primary:hover { background: #13d494; }
-
-    /* VIEW SWITCHER */
-    .view-toggle {
-      display: flex;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 3px;
-    }
-    .view-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 13px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: 600;
-      transition: all 0.2s;
-    }
-    .view-btn.active {
-      background: var(--card);
-      color: var(--text);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-
-    /* CONTENT BODY */
-    .content-area {
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    /* METRICS / KPI GRID */
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-    .kpi-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 20px;
-      position: relative;
-      overflow: hidden;
-    }
-    .kpi-title {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .kpi-value {
-      font-size: 30px;
-      font-weight: 800;
-      font-family: var(--font-mono);
-      color: var(--text);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .kpi-sub {
-      font-size: 12px;
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    /* FILTER BAR */
-    .filter-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .filter-pills {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .pill {
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 12.5px;
-      font-weight: 600;
-      padding: 7px 14px;
-      border-radius: 100px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .pill:hover, .pill.active {
-      background: var(--accent-light);
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* TABLE VIEW */
-    .table-container {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-    }
-    .leads-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-    }
-    .leads-table th {
-      background: rgba(255, 255, 255, 0.02);
-      padding: 14px 18px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      border-bottom: 1px solid var(--border);
-    }
-    .leads-table td {
-      padding: 16px 18px;
-      font-size: 13.5px;
-      border-bottom: 1px solid var(--border);
-      vertical-align: middle;
-    }
-    .leads-table tr:hover td {
-      background: var(--card-hover);
-    }
-    .lead-name-box {
-      display: flex;
-      flex-direction: column;
-    }
-    .lead-name { font-weight: 700; color: var(--text); }
-    .lead-date { font-size: 11.5px; color: var(--text-dim); margin-top: 2px; }
-
-    /* STATUS BADGES */
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 100px;
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-    }
-    .status-badge.new { background: rgba(59, 130, 246, 0.15); color: #60A5FA; border: 1px solid rgba(59, 130, 246, 0.3); }
-    .status-badge.contacted { background: rgba(245, 158, 11, 0.15); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.3); }
-    .status-badge.discussion { background: rgba(139, 92, 246, 0.15); color: #A78BFA; border: 1px solid rgba(139, 92, 246, 0.3); }
-    .status-badge.won { background: rgba(16, 185, 129, 0.15); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.3); }
-    .status-badge.lost { background: rgba(239, 68, 68, 0.15); color: #F87171; border: 1px solid rgba(239, 68, 68, 0.3); }
-
-    /* KANBAN PIPELINE VIEW */
-    .kanban-board {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      align-items: start;
-    }
-    .kanban-col {
-      background: var(--sidebar);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      min-height: 500px;
-    }
-    .kanban-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-    .kanban-title {
-      font-size: 13.5px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .kanban-count {
-      background: rgba(255,255,255,0.08);
-      font-size: 11px;
-      padding: 2px 7px;
-      border-radius: 100px;
-      font-family: var(--font-mono);
-    }
-    .kanban-cards {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .lead-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .lead-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-    }
-    .lead-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-    .lead-card-name { font-size: 14px; font-weight: 700; color: var(--text); }
-    .lead-card-service { font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
-    .lead-card-brief {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      line-height: 1.4;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      margin-bottom: 10px;
-    }
-    .lead-card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 8px;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      font-size: 11px;
-      color: var(--text-dim);
-    }
-
-    /* ACTION BUTTONS */
-    .action-btn-group {
-      display: flex;
-      gap: 6px;
-    }
-    .btn-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      color: var(--text);
-      cursor: pointer;
-      font-size: 13px;
-      transition: all 0.2s;
-      text-decoration: none;
-    }
-    .btn-icon.wa { color: #25D366; background: rgba(37,211,102,0.1); border-color: rgba(37,211,102,0.2); }
-    .btn-icon.wa:hover { background: #25D366; color: #fff; }
-    .btn-icon.call { color: #00B4D8; background: rgba(0,180,216,0.1); border-color: rgba(0,180,216,0.2); }
-    .btn-icon.call:hover { background: #00B4D8; color: #fff; }
-    .btn-icon.view:hover { background: var(--accent); color: #0B0E14; }
-
-    /* DETAIL DRAWER */
-    .drawer-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(4px);
-      z-index: 100;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    .drawer-overlay.active { opacity: 1; pointer-events: auto; }
-    .drawer {
-      position: fixed;
-      top: 0;
-      right: -550px;
-      width: 520px;
-      max-width: 90vw;
-      height: 100vh;
-      background: var(--sidebar);
-      border-left: 1px solid var(--border);
-      z-index: 101;
-      display: flex;
-      flex-direction: column;
-      transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: -10px 0 40px rgba(0,0,0,0.5);
-    }
-    .drawer.active { right: 0; }
-    .drawer-head {
-      padding: 24px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .drawer-head h3 { font-size: 18px; font-weight: 700; }
-    .drawer-close {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 20px;
-      cursor: pointer;
-    }
-    .drawer-body {
-      padding: 24px;
-      overflow-y: auto;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .detail-group {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-    }
-    .detail-label {
-      font-size: 11.5px;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-    .detail-value { font-size: 14.5px; color: var(--text); line-height: 1.5; }
-    .select-status {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 10px;
-      border-radius: 8px;
-      outline: none;
-      font-size: 13.5px;
-      cursor: pointer;
-    }
-
-    /* WHATSAPP TEMPLATES */
-    .template-box {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .template-btn {
-      background: rgba(37,211,102,0.08);
-      border: 1px solid rgba(37,211,102,0.25);
-      color: #25D366;
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 12.5px;
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: all 0.2s;
-    }
-    .template-btn:hover {
-      background: rgba(37,211,102,0.18);
-    }
-
-    /* NOTES BOX */
-    .notes-textarea {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px;
-      color: var(--text);
-      font-size: 13px;
-      resize: vertical;
-      outline: none;
-      min-height: 70px;
-      margin-bottom: 8px;
-    }
-
-    @media (max-width: 1024px) {
-      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-      .kanban-board { grid-template-columns: 1fr; }
-      .search-box { width: 250px; }
-    }
-    @media (max-width: 768px) {
-      .sidebar { display: none; }
-      .kpi-grid { grid-template-columns: 1fr; }
-      .topbar { padding: 0 16px; }
-      .content-area { padding: 16px; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/admin.css">
 </head>
 <body>
 
   <!-- PASSCODE GATE SCREEN -->
   <div id="lockScreen">
     <div class="lock-box">
-      <div class="lock-icon"><i class="bi bi-shield-lock"></i></div>
+      <img src="assets/images/logo.png" alt="AlphaTech+ Logo" style="height:52px; width:auto; margin:0 auto 16px; display:block; filter:drop-shadow(0 4px 12px rgba(15,190,133,0.35));">
       <h2>AlphaTech+ CRM</h2>
-      <p>Enter Master Passcode to access Lead Management & Pipelines</p>
+      <p>Enter Master Passcode to access Lead Management & Projects CMS</p>
       <input type="password" id="passcodeInput" class="lock-input" placeholder="••••••••" autofocus onkeydown="if(event.key==='Enter') unlockCRM()">
       <button class="btn-unlock" onclick="unlockCRM()">Access Dashboard →</button>
       <div id="lockError" style="color:#EF4444; font-size:12.5px; margin-top:12px; display:none;">Invalid Passcode. Please try again.</div>
@@ -698,21 +28,27 @@
   <!-- SIDEBAR NAVIGATION -->
   <aside class="sidebar">
     <div class="brand-area">
-      <div class="brand-logo">A+</div>
+      <div class="brand-logo">
+        <img src="assets/images/logo.png" alt="AlphaTech+">
+      </div>
       <div class="brand-info">
         <h1>Alpha CRM</h1>
-        <span>Leads & Pipeline</span>
+        <span>Leads & Projects CMS</span>
       </div>
     </div>
     <div class="nav-menu">
-      <a class="nav-item active" onclick="switchView('table')">
+      <a class="nav-item active" id="navLeads" onclick="switchView('table')">
         <i class="bi bi-person-lines-fill"></i>
         <span>All Leads</span>
         <span class="nav-badge" id="sidebarCount">0</span>
       </a>
-      <a class="nav-item" onclick="switchView('kanban')">
+      <a class="nav-item" id="navPipeline" onclick="switchView('kanban')">
         <i class="bi bi-kanban"></i>
         <span>Deals Pipeline</span>
+      </a>
+      <a class="nav-item" id="navProjects" onclick="switchView('projects')">
+        <i class="bi bi-folder-check"></i>
+        <span>Projects CMS</span>
       </a>
       <a class="nav-item" href="index.html" target="_blank">
         <i class="bi bi-box-arrow-up-right"></i>
@@ -742,10 +78,11 @@
       </div>
 
       <div class="top-actions">
-        <!-- VIEW TOGGLE (TABLE / KANBAN) -->
+        <!-- VIEW TOGGLE (TABLE / KANBAN / PROJECTS CMS) -->
         <div class="view-toggle">
-          <button class="view-btn active" id="viewTableBtn" onclick="switchView('table')"><i class="bi bi-table"></i> List</button>
-          <button class="view-btn" id="viewKanbanBtn" onclick="switchView('kanban')"><i class="bi bi-kanban"></i> Board</button>
+          <button class="view-btn active" id="viewTableBtn" onclick="switchView('table')"><i class="bi bi-table"></i> Leads</button>
+          <button class="view-btn" id="viewKanbanBtn" onclick="switchView('kanban')"><i class="bi bi-kanban"></i> Pipeline</button>
+          <button class="view-btn" id="viewProjectsBtn" onclick="switchView('projects')"><i class="bi bi-grid-1x2"></i> Projects CMS</button>
         </div>
 
         <button class="btn-action" onclick="exportLeadsCSV()"><i class="bi bi-download"></i> Export</button>
@@ -784,7 +121,7 @@
       </section>
 
       <!-- FILTER PILLS -->
-      <div class="filter-bar">
+      <div class="filter-bar" id="filterBar">
         <div class="filter-pills">
           <button class="pill active" onclick="setFilter('all', this)">All Leads</button>
           <button class="pill" onclick="setFilter('new', this)">New Leads</button>
@@ -802,7 +139,7 @@
           <thead>
             <tr>
               <th>Lead Name</th>
-              <th>WhatsApp Phone</th>
+              <th>WhatsApp & Email</th>
               <th>Inquired Service</th>
               <th>Status</th>
               <th>Source / Campaign</th>
@@ -823,7 +160,6 @@
 
       <!-- VIEW 2: KANBAN BOARD -->
       <div class="kanban-board" id="kanbanView" style="display:none;">
-        <!-- NEW -->
         <div class="kanban-col">
           <div class="kanban-header">
             <span class="kanban-title" style="color:#60A5FA;"><i class="bi bi-record-circle"></i> New</span>
@@ -832,7 +168,6 @@
           <div class="kanban-cards" id="kanbanColNew"></div>
         </div>
 
-        <!-- CONTACTED -->
         <div class="kanban-col">
           <div class="kanban-header">
             <span class="kanban-title" style="color:#FBBF24;"><i class="bi bi-telephone-outbound"></i> Contacted</span>
@@ -841,7 +176,6 @@
           <div class="kanban-cards" id="kanbanColContacted"></div>
         </div>
 
-        <!-- IN DISCUSSION -->
         <div class="kanban-col">
           <div class="kanban-header">
             <span class="kanban-title" style="color:#A78BFA;"><i class="bi bi-chat-quote"></i> In Discussion</span>
@@ -850,13 +184,27 @@
           <div class="kanban-cards" id="kanbanColDiscussion"></div>
         </div>
 
-        <!-- WON -->
         <div class="kanban-col">
           <div class="kanban-header">
             <span class="kanban-title" style="color:#34D399;"><i class="bi bi-check2-circle"></i> Won</span>
             <span class="kanban-count" id="countColWon">0</span>
           </div>
           <div class="kanban-cards" id="kanbanColWon"></div>
+        </div>
+      </div>
+
+      <!-- VIEW 3: PROJECTS CMS MANAGER (EDIT FRONTEND PROJECTS) -->
+      <div id="projectsView" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:12px;">
+          <div>
+            <h2 style="font-size:20px; font-weight:700;">Frontend Projects Manager (CMS)</h2>
+            <p style="font-size:13px; color:var(--text-muted);">Manage and edit portfolio solutions displayed on the main website.</p>
+          </div>
+          <button class="btn-action primary" onclick="openProjectModal()"><i class="bi bi-plus-lg"></i> Add New Solution</button>
+        </div>
+
+        <div class="projects-cms-grid" id="projectsCmsGrid">
+          <!-- Dynamically populated by assets/js/admin.js -->
         </div>
       </div>
 
@@ -872,14 +220,12 @@
     </div>
 
     <div class="drawer-body">
-      <!-- CONTACT & SERVICE -->
       <div class="detail-group">
         <div class="detail-label">Client Contact</div>
         <div style="font-size:16px; font-weight:700; color:var(--text); margin-bottom:4px;" id="drawerPhone">+91 00000 00000</div>
         <div style="font-size:13px; color:var(--accent); font-weight:600;" id="drawerService">General Inquiry</div>
       </div>
 
-      <!-- STATUS SELECTOR -->
       <div class="detail-group">
         <div class="detail-label">Update Pipeline Status</div>
         <select class="select-status" id="drawerStatusSelect" onchange="updateLeadStatusFromDrawer()">
@@ -891,13 +237,11 @@
         </select>
       </div>
 
-      <!-- PROJECT BRIEF -->
       <div class="detail-group">
         <div class="detail-label">Project Brief / Requirement</div>
         <div class="detail-value" id="drawerBrief" style="white-space:pre-wrap;">No brief provided.</div>
       </div>
 
-      <!-- 1-CLICK WHATSAPP OUTREACH TEMPLATES -->
       <div class="detail-group">
         <div class="detail-label">Quick WhatsApp Outreach</div>
         <div class="template-box">
@@ -916,7 +260,6 @@
         </div>
       </div>
 
-      <!-- METADATA & SOURCE -->
       <div class="detail-group">
         <div class="detail-label">Traffic Attribution & UTM</div>
         <div style="font-size:12.5px; color:var(--text-muted); line-height:1.6;" id="drawerMeta">
@@ -925,7 +268,6 @@
         </div>
       </div>
 
-      <!-- INTERNAL NOTES -->
       <div class="detail-group">
         <div class="detail-label">Admin Follow-up Notes</div>
         <textarea id="drawerNotesInput" class="notes-textarea" placeholder="Type internal call notes, agreed budget, next follow-up date..."></textarea>
@@ -935,400 +277,81 @@
     </div>
   </aside>
 
-  <!-- FIREBASE MODULE SCRIPT -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-    import { getFirestore, collection, onSnapshot, doc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+  <!-- EDIT / ADD PROJECT MODAL WITH CLOUDINARY UPLOAD -->
+  <div class="cms-modal-overlay" id="cmsModal">
+    <div class="cms-modal">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <h3 id="cmsModalTitle" style="margin:0;">Edit Project Solution</h3>
+        <button onclick="closeProjectModal()" style="background:none; border:none; color:var(--text-muted); font-size:20px; cursor:pointer;"><i class="bi bi-x-lg"></i></button>
+      </div>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCbd_16UIKRGUQsUc47Zl8ccsRrq0DWBw0",
-      authDomain: "alpha-tech-plus.firebaseapp.com",
-      projectId: "alpha-tech-plus",
-      storageBucket: "alpha-tech-plus.firebasestorage.app",
-      messagingSenderId: "1040509888533",
-      appId: "1:1040509888533:web:5192a429834ed9ce95861c",
-      measurementId: "G-MQQ6ZZ539D"
-    };
+      <form onsubmit="event.preventDefault(); saveProjectCMS();">
+        <div class="cms-form-group">
+          <label>Project Title</label>
+          <input type="text" id="projTitleInput" class="cms-input" placeholder="e.g. ReliefMind Triage" required>
+        </div>
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    // STATE
-    window.allLeads = [];
-    window.currentFilter = 'all';
-    window.currentView = 'table';
-    window.activeLeadId = null;
-
-    // MASTER PASSCODE (Default: alpha2026)
-    const MASTER_PASSCODE = 'alpha2026';
-
-    window.unlockCRM = function() {
-      const pin = document.getElementById('passcodeInput').value.trim();
-      if (pin === MASTER_PASSCODE) {
-        sessionStorage.setItem('alpha_crm_auth', 'true');
-        document.getElementById('lockScreen').style.display = 'none';
-      } else {
-        document.getElementById('lockError').style.display = 'block';
-      }
-    };
-
-    window.lockCRM = function() {
-      sessionStorage.removeItem('alpha_crm_auth');
-      document.getElementById('lockScreen').style.display = 'flex';
-      document.getElementById('passcodeInput').value = '';
-    };
-
-    // Auto check session
-    if (sessionStorage.getItem('alpha_crm_auth') === 'true') {
-      document.getElementById('lockScreen').style.display = 'none';
-    }
-
-    // REAL-TIME FIRESTORE LISTENER
-    function initLeadsListener() {
-      try {
-        const q = query(collection(db, 'leads'), orderBy('createdAt', 'desc'));
-        onSnapshot(q, (snapshot) => {
-          const leads = [];
-          snapshot.forEach(docSnap => {
-            leads.push({ id: docSnap.id, ...docSnap.data() });
-          });
-          window.allLeads = leads;
-          updateDashboard();
-        }, (error) => {
-          console.error("Firestore error in Admin CRM:", error);
-          document.getElementById('leadsTableBody').innerHTML = `
-            <tr>
-              <td colspan="7" style="text-align:center; padding:40px; color:#EF4444;">
-                <i class="bi bi-exclamation-triangle" style="font-size:24px;"></i>
-                <div style="margin-top:8px;">Permission error or connection issue reading Firestore.</div>
-                <div style="font-size:12px; color:var(--text-dim); margin-top:4px;">Ensure Firestore Security Rules allow read access.</div>
-              </td>
-            </tr>
-          `;
-        });
-      } catch (err) {
-        console.error("Listener error:", err);
-      }
-    }
-
-    initLeadsListener();
-
-    // UPDATE DASHBOARD UI
-    function updateDashboard() {
-      const leads = window.allLeads;
-
-      // KPIs
-      document.getElementById('kpiTotal').innerText = leads.length;
-      document.getElementById('sidebarCount').innerText = leads.length;
-      document.getElementById('kpiNew').innerText = leads.filter(l => (l.status || 'new') === 'new').length;
-      document.getElementById('kpiDiscussion').innerText = leads.filter(l => l.status === 'discussion').length;
-      document.getElementById('kpiWon').innerText = leads.filter(l => l.status === 'won').length;
-
-      // Render Active View
-      renderLeads();
-    }
-
-    // FILTER & SEARCH
-    function getFilteredLeads() {
-      const term = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
-      let list = window.allLeads;
-
-      // Filter by status/tag
-      if (window.currentFilter === 'new') list = list.filter(l => (l.status || 'new') === 'new');
-      else if (window.currentFilter === 'contacted') list = list.filter(l => l.status === 'contacted');
-      else if (window.currentFilter === 'discussion') list = list.filter(l => l.status === 'discussion');
-      else if (window.currentFilter === 'won') list = list.filter(l => l.status === 'won');
-      else if (window.currentFilter === '5999') list = list.filter(l => (l.service || '').includes('5,999') || (l.brief || '').includes('5999'));
-
-      // Search term
-      if (term) {
-        list = list.filter(l => 
-          (l.name || l.fullName || '').toLowerCase().includes(term) ||
-          (l.phone || '').toLowerCase().includes(term) ||
-          (l.service || '').toLowerCase().includes(term) ||
-          (l.brief || l.message || '').toLowerCase().includes(term)
-        );
-      }
-
-      return list;
-    }
-
-    function renderLeads() {
-      const leads = getFilteredLeads();
-      document.getElementById('filteredCountLabel').innerText = `Showing ${leads.length} of ${window.allLeads.length} leads`;
-
-      if (window.currentView === 'table') {
-        renderTable(leads);
-      } else {
-        renderKanban(leads);
-      }
-    }
-
-    // RENDER TABLE
-    function renderTable(leads) {
-      const tbody = document.getElementById('leadsTableBody');
-      if (!leads.length) {
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="7" style="text-align:center; padding:40px; color:var(--text-dim);">
-              <i class="bi bi-inbox" style="font-size:26px;"></i>
-              <div style="margin-top:6px;">No leads matching current search/filter.</div>
-            </td>
-          </tr>
-        `;
-        return;
-      }
-
-      tbody.innerHTML = leads.map(l => {
-        const name = l.name || l.fullName || 'Anonymous';
-        const phone = l.phone || 'N/A';
-        const service = l.service || 'General Project';
-        const status = l.status || 'new';
-        const source = l.source || l.utm_source || 'website';
-        const dateStr = l.submittedAt ? new Date(l.submittedAt).toLocaleDateString('en-IN', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }) : 'Recently';
-
-        const cleanPhone = phone.replace(/[^0-9]/g, '');
-        const waMsg = encodeURIComponent(`Hi ${name}! This is AlphaTech+ regarding your inquiry for ${service}. How can we assist you today?`);
-
-        return `
-          <tr>
-            <td>
-              <div class="lead-name-box">
-                <span class="lead-name">${escapeHtml(name)}</span>
-                <span class="lead-date">${dateStr}</span>
-              </div>
-            </td>
-            <td>
-              <span style="font-family:var(--font-mono); font-size:13px;">${escapeHtml(phone)}</span>
-            </td>
-            <td>
-              <span style="font-weight:600; color:var(--text);">${escapeHtml(service)}</span>
-            </td>
-            <td>
-              <span class="status-badge ${status}">${getStatusLabel(status)}</span>
-            </td>
-            <td>
-              <span style="font-size:12px; color:var(--text-muted); background:rgba(255,255,255,0.05); padding:3px 8px; border-radius:6px;">${escapeHtml(source)}</span>
-            </td>
-            <td style="font-size:12.5px; color:var(--text-dim);">${dateStr}</td>
-            <td style="text-align:right;">
-              <div class="action-btn-group" style="justify-content:flex-end;">
-                <a href="https://wa.me/${cleanPhone}?text=${waMsg}" target="_blank" class="btn-icon wa" title="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
-                <a href="tel:${cleanPhone}" class="btn-icon call" title="Call Client"><i class="bi bi-telephone"></i></a>
-                <button class="btn-icon view" onclick="openLeadDrawer('${l.id}')" title="View Full Details"><i class="bi bi-eye"></i></button>
-              </div>
-            </td>
-          </tr>
-        `;
-      }).join('');
-    }
-
-    // RENDER KANBAN
-    function renderKanban(leads) {
-      const cols = {
-        new: document.getElementById('kanbanColNew'),
-        contacted: document.getElementById('kanbanColContacted'),
-        discussion: document.getElementById('kanbanColDiscussion'),
-        won: document.getElementById('kanbanColWon')
-      };
-
-      Object.values(cols).forEach(c => c.innerHTML = '');
-
-      const counts = { new: 0, contacted: 0, discussion: 0, won: 0 };
-
-      leads.forEach(l => {
-        let status = l.status || 'new';
-        if (!cols[status]) status = 'new';
-        counts[status]++;
-
-        const name = l.name || l.fullName || 'Anonymous';
-        const service = l.service || 'General Project';
-        const brief = l.brief || l.message || 'No description entered.';
-        const dateStr = l.submittedAt ? new Date(l.submittedAt).toLocaleDateString('en-IN', { month:'short', day:'numeric' }) : 'Recent';
-
-        const card = document.createElement('div');
-        card.className = 'lead-card';
-        card.onclick = () => openLeadDrawer(l.id);
-        card.innerHTML = `
-          <div class="lead-card-header">
-            <span class="lead-card-name">${escapeHtml(name)}</span>
-            <span class="status-badge ${status}">${getStatusLabel(status)}</span>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="cms-form-group">
+            <label>Filter Category</label>
+            <select id="projCategorySelect" class="cms-select">
+              <option value="ai">AI & Healthcare</option>
+              <option value="web">Full-Stack & Travel</option>
+              <option value="enterprise">Enterprise & CRM</option>
+            </select>
           </div>
-          <div class="lead-card-service">${escapeHtml(service)}</div>
-          <div class="lead-card-brief">${escapeHtml(brief)}</div>
-          <div class="lead-card-footer">
-            <span><i class="bi bi-phone"></i> ${escapeHtml(l.phone || '')}</span>
-            <span>${dateStr}</span>
+          <div class="cms-form-group">
+            <label>Display Tagline</label>
+            <input type="text" id="projTaglineInput" class="cms-input" placeholder="e.g. AI · HealthTech">
           </div>
-        `;
-        cols[status].appendChild(card);
-      });
+        </div>
 
-      document.getElementById('countColNew').innerText = counts.new;
-      document.getElementById('countColContacted').innerText = counts.contacted;
-      document.getElementById('countColDiscussion').innerText = counts.discussion;
-      document.getElementById('countColWon').innerText = counts.won;
-    }
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="cms-form-group">
+            <label>Status Badge</label>
+            <input type="text" id="projStatusInput" class="cms-input" placeholder="e.g. Live System, Deployed">
+          </div>
+          <div class="cms-form-group">
+            <label>Key Metric / Highlight</label>
+            <input type="text" id="projMetricInput" class="cms-input" placeholder="e.g. 99.4% Accuracy">
+          </div>
+        </div>
 
-    function getStatusLabel(s) {
-      switch(s) {
-        case 'new': return 'New';
-        case 'contacted': return 'Contacted';
-        case 'discussion': return 'Discussion';
-        case 'won': return 'Won';
-        case 'lost': return 'Lost';
-        default: return 'New';
-      }
-    }
+        <!-- CLOUDINARY IMAGE UPLOAD WIDGET -->
+        <div class="cms-form-group">
+          <label><i class="bi bi-cloud-arrow-up" style="color:var(--accent);"></i> Project Image (Cloudinary CDN)</label>
+          <div style="display:flex; gap:10px; align-items:center; margin-bottom:8px; flex-wrap:wrap;">
+            <input type="file" id="projImageFileInput" accept="image/*" style="display:none;" onchange="handleProjectImageUpload(event)">
+            <button type="button" class="btn-action primary" onclick="document.getElementById('projImageFileInput').click()">
+              <i class="bi bi-upload"></i> Upload Image to Cloudinary
+            </button>
+            <span id="uploadStatusText" style="font-size:12px; color:var(--text-dim);">No file chosen</span>
+          </div>
+          <input type="text" id="projImageInput" class="cms-input" placeholder="Cloudinary URL or local assets/images/ path">
+          <div id="projImagePreviewBox" style="margin-top:10px; display:none;">
+            <img id="projImagePreview" src="" alt="Preview" style="max-height:120px; border-radius:8px; border:1px solid var(--border);">
+          </div>
+        </div>
 
-    function escapeHtml(str) {
-      return String(str || '').replace(/[&<>"']/g, function(m) {
-        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
-      });
-    }
+        <div class="cms-form-group">
+          <label>Tech Stack Tags (comma separated)</label>
+          <input type="text" id="projTechInput" class="cms-input" placeholder="Gemini AI, Google Maps API, Node.js">
+        </div>
 
-    // DRAWER LOGIC
-    window.openLeadDrawer = function(leadId) {
-      const lead = window.allLeads.find(l => l.id === leadId);
-      if (!lead) return;
+        <div class="cms-form-group">
+          <label>Description & Scope</label>
+          <textarea id="projDescInput" class="cms-textarea" rows="3" placeholder="Describe the solution architecture and impact..." required></textarea>
+        </div>
 
-      window.activeLeadId = leadId;
-      document.getElementById('drawerName').innerText = lead.name || lead.fullName || 'Lead Details';
-      document.getElementById('drawerPhone').innerText = lead.phone || 'N/A';
-      document.getElementById('drawerService').innerText = lead.service || 'General Project';
-      document.getElementById('drawerStatusSelect').value = lead.status || 'new';
-      document.getElementById('drawerBrief').innerText = lead.brief || lead.message || 'No requirement brief provided.';
+        <div style="display:flex; gap:12px; justify-content:flex-end; margin-top:20px;">
+          <button type="button" class="btn-action" onclick="closeProjectModal()">Cancel</button>
+          <button type="submit" class="btn-action primary"><i class="bi bi-check-lg"></i> Save Solution</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-      const utmInfo = `Source: ${lead.source || 'website'}<br>UTM Source: ${lead.utm_source || 'direct'}<br>UTM Campaign: ${lead.utm_campaign || 'none'}<br>Submitted: ${lead.submittedAt || 'N/A'}`;
-      document.getElementById('drawerMeta').innerHTML = utmInfo;
-
-      document.getElementById('drawerNotesInput').value = lead.adminNotes || '';
-      document.getElementById('drawerNotesLog').innerText = lead.notesUpdatedAt ? `Last saved: ${new Date(lead.notesUpdatedAt).toLocaleString()}` : '';
-
-      document.getElementById('drawerOverlay').classList.add('active');
-      document.getElementById('leadDrawer').classList.add('active');
-    };
-
-    window.closeDrawer = function() {
-      document.getElementById('drawerOverlay').classList.remove('active');
-      document.getElementById('leadDrawer').classList.remove('active');
-      window.activeLeadId = null;
-    };
-
-    window.updateLeadStatusFromDrawer = async function() {
-      if (!window.activeLeadId) return;
-      const newStatus = document.getElementById('drawerStatusSelect').value;
-      try {
-        const leadRef = doc(db, 'leads', window.activeLeadId);
-        await updateDoc(leadRef, {
-          status: newStatus,
-          statusUpdatedAt: new Date().toISOString()
-        });
-        console.log(`Lead status updated to: ${newStatus}`);
-      } catch (err) {
-        console.error("Error updating status:", err);
-        alert("Failed to update status. Check Firestore permissions.");
-      }
-    };
-
-    window.saveDrawerNotes = async function() {
-      if (!window.activeLeadId) return;
-      const notes = document.getElementById('drawerNotesInput').value.trim();
-      try {
-        const leadRef = doc(db, 'leads', window.activeLeadId);
-        await updateDoc(leadRef, {
-          adminNotes: notes,
-          notesUpdatedAt: new Date().toISOString()
-        });
-        document.getElementById('drawerNotesLog').innerText = `Last saved: Just now`;
-        alert("Follow-up notes saved successfully!");
-      } catch (err) {
-        console.error("Error saving notes:", err);
-        alert("Failed to save notes.");
-      }
-    };
-
-    window.sendWhatsAppTemplate = function(type) {
-      if (!window.activeLeadId) return;
-      const lead = window.allLeads.find(l => l.id === window.activeLeadId);
-      if (!lead || !lead.phone) return;
-
-      const cleanPhone = lead.phone.replace(/[^0-9]/g, '');
-      const name = lead.name || lead.fullName || 'there';
-      const service = lead.service || 'your project';
-
-      let msg = '';
-      if (type === 'intro') {
-        msg = `Hello ${name}! 👋\n\nThank you for reaching out to AlphaTech+. We received your inquiry regarding *${service}*.\n\nOur team has reviewed your requirements. When would be a good time for a quick 5-minute discussion today?`;
-      } else if (type === '5999') {
-        msg = `Hi ${name}! 🎉\n\nRegarding the *₹5,999 Launch Package* you reserved:\n✓ Custom Domain & Managed Hosting\n✓ Admin Dashboard & Lead Capture\n✓ Full Source Code Ownership\n✓ 30-Hour Express Turnaround\n\nWould you like us to share our onboarding checklist so we can get started right away?`;
-      } else if (type === 'meet') {
-        msg = `Hi ${name}!\n\nWe would love to schedule a brief Google Meet demo to present our architecture and live project breakdown for *${service}*.\n\nPlease let us know if 11:00 AM or 4:00 PM works better for you tomorrow.`;
-      }
-
-      window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank');
-    };
-
-    // VIEW SWITCHING
-    window.switchView = function(view) {
-      window.currentView = view;
-      document.getElementById('viewTableBtn').classList.toggle('active', view === 'table');
-      document.getElementById('viewKanbanBtn').classList.toggle('active', view === 'kanban');
-      document.getElementById('tableView').style.display = view === 'table' ? 'block' : 'none';
-      document.getElementById('kanbanView').style.display = view === 'kanban' ? 'grid' : 'none';
-      renderLeads();
-    };
-
-    window.setFilter = function(filter, btn) {
-      window.currentFilter = filter;
-      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      renderLeads();
-    };
-
-    window.handleSearch = function() {
-      renderLeads();
-    };
-
-    window.refreshLeads = function() {
-      renderLeads();
-    };
-
-    // EXPORT TO CSV
-    window.exportLeadsCSV = function() {
-      const leads = window.allLeads;
-      if (!leads.length) {
-        alert("No leads available to export.");
-        return;
-      }
-
-      let csv = "ID,Name,Phone,Service,Status,Source,UTM_Source,UTM_Campaign,SubmittedAt,Brief,AdminNotes\n";
-      leads.forEach(l => {
-        const row = [
-          `"${l.id}"`,
-          `"${(l.name || l.fullName || '').replace(/"/g, '""')}"`,
-          `"${(l.phone || '').replace(/"/g, '""')}"`,
-          `"${(l.service || '').replace(/"/g, '""')}"`,
-          `"${(l.status || 'new')}"`,
-          `"${(l.source || 'website')}"`,
-          `"${(l.utm_source || 'direct')}"`,
-          `"${(l.utm_campaign || 'none')}"`,
-          `"${(l.submittedAt || '')}"`,
-          `"${(l.brief || l.message || '').replace(/"/g, '""')}"`,
-          `"${(l.adminNotes || '').replace(/"/g, '""')}"`
-        ];
-        csv += row.join(",") + "\n";
-      });
-
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `alphatech_leads_${new Date().toISOString().slice(0,10)}.csv`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    };
-  </script>
+  <!-- MODULAR ADMIN SCRIPT -->
+  <script type="module" src="assets/js/admin.js"></script>
 </body>
 </html>
