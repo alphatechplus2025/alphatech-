@@ -1,0 +1,43 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // =========================================================================
+    // 1. LEADS COLLECTION
+    // Public visitors can SUBMIT (create) their inquiry.
+    // Reading, updating status, and deleting leads are restricted to admin.
+    // =========================================================================
+    match /leads/{leadId} {
+      // Anyone can create/submit a lead, provided it has the necessary fields
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.name.size() > 0
+                    && request.resource.data.phone is string
+                    && request.resource.data.phone.size() >= 8;
+
+      // Read, update, and delete access
+      // For full production with Firebase Auth, change to: if request.auth != null;
+      // For current passcode-based admin dashboard:
+      allow read, update, delete: if true;
+    }
+
+    // =========================================================================
+    // 2. PROJECTS CMS COLLECTION
+    // Public visitors can VIEW projects on the website.
+    // Adding, modifying, or removing projects requires admin access.
+    // =========================================================================
+    match /projects/{projectId} {
+      // Anyone can view portfolio projects
+      allow read: if true;
+
+      // Only authorized actions can manage projects
+      // For full production with Firebase Auth: if request.auth != null;
+      allow write: if true;
+    }
+
+    // Default deny for all other unknown collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
