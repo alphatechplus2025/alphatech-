@@ -21,7 +21,7 @@ const MASTER_PASSCODE = 'alpha2026';
 
 // CLOUDINARY CONFIGURATION (From user Cloudinary Console)
 export const CLOUDINARY_CONFIG = {
-  cloudName: 'ia0hqhoi',
+  cloudName: 'ia0hqhol',
   uploadPreset: 'Alpha Tech +'
 };
 
