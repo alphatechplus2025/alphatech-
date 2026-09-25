@@ -3,10 +3,31 @@
 // Detailed Qualifying Form Handler with UTM Attribution
 // ==========================================================================
 
-import { db, collection, addDoc, serverTimestamp } from "./firebase-config.js";
-import { trackAlphaConversion } from "./tracking.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyCbd_16UIKRGUQsUc47Zl8ccsRrq0DWBw0",
+  authDomain: "alpha-tech-plus.firebaseapp.com",
+  projectId: "alpha-tech-plus",
+  storageBucket: "alpha-tech-plus.firebasestorage.app",
+  messagingSenderId: "1040509888533",
+  appId: "1:1040509888533:web:5192a429834ed9ce95861c",
+  measurementId: "G-MQQ6ZZ539D"
+};
 
-export function initLeadForm() {
+function getFirestoreDb() {
+  try {
+    if (typeof firebase !== 'undefined') {
+      if (!firebase.apps || !firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      }
+      return firebase.firestore();
+    }
+  } catch (err) {
+    console.warn('[Firebase Init Warning]', err);
+  }
+  return null;
+}
+
+function initLeadForm() {
   const projectForm = document.getElementById('projectForm');
   const submitBtn = document.getElementById('leadSubmitBtn');
   const feedbackEl = document.getElementById('leadFeedback');
@@ -59,21 +80,28 @@ export function initLeadForm() {
         utm_medium: utmMedium,
         utm_campaign: utmCampaign,
         status: 'new',
-        createdAt: serverTimestamp(),
         submittedAt: new Date().toISOString()
       };
 
       // 5. Store in Cloud Firestore
-      const docRef = await addDoc(collection(db, 'leads'), leadRecord);
-      console.log('[Firestore] Lead recorded successfully with ID:', docRef.id);
+      const db = getFirestoreDb();
+      let leadId = 'lead_' + Date.now();
+      if (db) {
+        leadRecord.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+        const docRef = await db.collection('leads').add(leadRecord);
+        leadId = docRef.id;
+        console.log('[Firestore] Lead recorded successfully with ID:', leadId);
+      }
 
       // 6. Dispatch Conversions to Meta Pixel & GA4
-      trackAlphaConversion('lead_submitted', {
-        leadId: docRef.id,
-        service: service,
-        budget: budget,
-        source: utmSource
-      });
+      if (typeof window.trackAlphaConversion === 'function') {
+        window.trackAlphaConversion('lead_submitted', {
+          leadId: leadId,
+          service: service,
+          budget: budget,
+          source: utmSource
+        });
+      }
 
       // 7. Reset Form & Render Success Box with WhatsApp Direct Connect
       projectForm.reset();
@@ -115,7 +143,7 @@ export function initLeadForm() {
       if (feedbackEl) {
         feedbackEl.innerHTML = `
           <div style="background:rgba(255,80,80,0.12); border:1px solid rgba(255,80,80,0.35); color:#FF6B6B; padding:14px; border-radius:12px; margin-top:16px; text-align:center; font-size:13px;">
-            <div><i class="bi bi-exclamation-triangle-fill"></i> Database paused or offline.</div>
+            <div><i class="bi bi-exclamation-triangle-fill"></i> Database temporarily offline.</div>
             <div style="margin-top:8px;">
               <a href="https://wa.me/919042115140?text=${waFallback}" target="_blank" style="color:#25D366; text-decoration:underline; font-weight:700;">
                 Click here to send directly via WhatsApp →

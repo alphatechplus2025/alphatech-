@@ -3,8 +3,6 @@
 // 3D Visualizer, Navigation, Interactive AI Chatbot, Portfolio, Modal
 // ==========================================================================
 
-import { db, collection, onSnapshot, query, orderBy } from "./firebase-config.js";
-
 /* ---------- NAVIGATION ---------- */
 const nav = document.getElementById('nav');
 if (nav) {

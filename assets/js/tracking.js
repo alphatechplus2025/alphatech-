@@ -3,7 +3,7 @@
 // Meta Pixel + Google Analytics 4 + WhatsApp Link Interceptor
 // ==========================================================================
 
-export function trackAlphaConversion(eventName, eventData = {}) {
+function trackAlphaConversion(eventName, eventData = {}) {
   try {
     // 1. Google Analytics 4 (gtag)
     if (typeof window.gtag === 'function') {
@@ -38,7 +38,7 @@ export function trackAlphaConversion(eventName, eventData = {}) {
 window.trackAlphaConversion = trackAlphaConversion;
 
 // Auto-tag and monitor all WhatsApp links
-export function initWhatsAppTracker() {
+function initWhatsAppTracker() {
   document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
     link.addEventListener('click', function() {
       const placement = this.getAttribute('data-wa-placement') || 
