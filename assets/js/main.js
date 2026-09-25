@@ -201,31 +201,26 @@ function initThreeHero() {
       const radius = spread * (0.5 + Math.random() * 0.5);
       const size = 0.62 - level * 0.02;
 
-      const geo = new THREE.BoxGeometry(size, size * 0.7, size * 1.1);
-      const isAccent = (level === 2 && i === 1) || (level === 4 && i === 0) || Math.random() < 0.12;
-      const mat = new THREE.MeshBasicMaterial({
-        color: isAccent ? accent : soft,
-        wireframe: true,
-        transparent: true,
-        opacity: isAccent ? 0.95 : 0.45
-      });
-      const mesh = new THREE.Mesh(geo, mat);
+      const geo = new THREE.BoxGeometry(size, size, size);
+      const mat = new THREE.MeshBasicMaterial({ color: soft, transparent: true, opacity: 0.55 });
+      const cube = new THREE.Mesh(geo, mat);
+
+      const edges = new THREE.EdgesGeometry(geo);
+      const lineMat = new THREE.LineBasicMaterial({ color: accent, transparent: true, opacity: 0.75 });
+      const line = new THREE.LineSegments(edges, lineMat);
+      cube.add(line);
 
       const targetX = Math.cos(angle) * radius;
-      const targetY = (level - levels / 2) * 0.75;
-      const targetZ = Math.sin(angle) * radius * 0.7;
+      const targetZ = Math.sin(angle) * radius;
+      const targetY = level * 0.9 - 2.6;
 
-      mesh.position.set(
-        targetX + (Math.random() - 0.5) * 4,
-        targetY + (Math.random() - 0.5) * 5,
-        targetZ + (Math.random() - 0.5) * 4
-      );
+      cube.position.set(targetX, -14 - Math.random() * 6, targetZ);
 
-      group.add(mesh);
+      group.add(cube);
       blocks.push({
-        mesh,
+        mesh: cube,
         target: new THREE.Vector3(targetX, targetY, targetZ),
-        delay: Math.random() * 0.8,
+        delay: (level * 0.09 + Math.random() * 0.5),
         speed: 0.045 + Math.random() * 0.02,
         floatOffset: Math.random() * Math.PI * 2,
         rotSpeed: (Math.random() - 0.5) * 0.002
