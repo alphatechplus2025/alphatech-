@@ -151,6 +151,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
@@ -323,156 +324,259 @@
   <div class="wrap">
     <div class="section-head reveal" style="text-align:center;">
       <div class="about-eyebrow" style="justify-content:center;">Case Studies</div>
-      <h2 class="display">Selected Work & Impact</h2>
+      <h2 class="display">Selected Work &amp; Impact</h2>
+      <p style="max-width:640px; margin:14px auto 0; font-size:15px; color:var(--muted); line-height:1.6;">Production architectures engineered for enterprise scale, intelligence, and high-performance operations.</p>
     </div>
 
-    <!-- FILTER TABS -->
-    <div class="portfolio-tabs reveal">
-      <button class="p-tab-btn active" onclick="filterPortfolio('all', this)">All Solutions (6)</button>
-      <button class="p-tab-btn" onclick="filterPortfolio('ai', this)"><i class="bi bi-robot"></i> AI & Healthcare (3)</button>
-      <button class="p-tab-btn" onclick="filterPortfolio('web', this)"><i class="bi bi-window-sidebar"></i> Full-Stack & Travel (2)</button>
-      <button class="p-tab-btn" onclick="filterPortfolio('enterprise', this)"><i class="bi bi-building"></i> Enterprise & CRM (2)</button>
-    </div>
-
-    <div class="portfolio-grid reveal" id="portfolioGrid">
-      <!-- RELIEFMIND -->
-      <div class="portfolio-card" data-cat="ai">
-        <div class="portfolio-thumb">
-          <span class="portfolio-status"><span class="dot"></span> Live System</span>
-          <img src="assets/images/project-reliefmind.png" alt="ReliefMind Triage — AI Emergency Healthcare Platform by Alpha Tech Plus" loading="lazy" decoding="async" width="600" height="400">
-        </div>
-        <div class="portfolio-body">
-          <span class="portfolio-tag">AI · HealthTech</span>
-          <h3>ReliefMind Triage</h3>
-          <p>AI-powered bystander emergency triage system using LLM-driven symptom extraction, START disaster protocol alignment, and real-time Google Maps hospital locator with auto-radius expansion.</p>
-          <div class="tech-stack-row">
-            <span class="tech-tag">Gemini AI</span>
-            <span class="tech-tag">Google Maps API</span>
-            <span class="tech-tag">START Protocol</span>
-            <span class="tech-tag">Node.js</span>
-          </div>
-          <div class="portfolio-action-row">
-            <button onclick="openModal('ReliefMind Triage Solution')" class="btn-project-inquire">Inquire Architecture <i class="bi bi-arrow-right"></i></button>
-            <span style="font-size:12px; color:var(--muted); font-weight:600;"><i class="bi bi-check2-circle" style="color:var(--accent-dark);"></i> 99.4% Accuracy</span>
-          </div>
-        </div>
+    <!-- CONTROLS: FILTER TABS + SWIPER NAV BUTTONS -->
+    <div class="portfolio-controls-bar reveal">
+      <div class="portfolio-tabs">
+        <button class="p-tab-btn active" onclick="filterPortfolio('all', this)">All Solutions (6)</button>
+        <button class="p-tab-btn" onclick="filterPortfolio('ai', this)"><i class="bi bi-robot"></i> AI &amp; Healthcare (3)</button>
+        <button class="p-tab-btn" onclick="filterPortfolio('web', this)"><i class="bi bi-window-sidebar"></i> Full-Stack &amp; Travel (2)</button>
+        <button class="p-tab-btn" onclick="filterPortfolio('enterprise', this)"><i class="bi bi-building"></i> Enterprise &amp; CRM (2)</button>
       </div>
-
-      <!-- MYHEALTH+ -->
-      <div class="portfolio-card" data-cat="ai">
-        <div class="portfolio-thumb">
-          <span class="portfolio-status"><span class="dot"></span> Deployed</span>
-          <img src="assets/images/project-myhealth.png" alt="MyHealth Plus — AI Health Assistant & Symptom Analyzer" loading="lazy" decoding="async" width="600" height="400">
-        </div>
-        <div class="portfolio-body">
-          <span class="portfolio-tag">AI · Healthcare</span>
-          <h3>MyHealth+ AI Health Analyzer</h3>
-          <p>Full-stack health analyzer powered by Google Gemini AI for NLP-based symptom analysis, AI health assistant chatbot, searchable medicine database, and nearby facility locator.</p>
-          <div class="tech-stack-row">
-            <span class="tech-tag">Gemini Pro</span>
-            <span class="tech-tag">NLP Extraction</span>
-            <span class="tech-tag">Medicine DB</span>
-            <span class="tech-tag">Express.js</span>
-          </div>
-          <div class="portfolio-action-row">
-            <button onclick="openModal('MyHealth+ AI Solution')" class="btn-project-inquire">Inquire Architecture <i class="bi bi-arrow-right"></i></button>
-            <span style="font-size:12px; color:var(--muted); font-weight:600;"><i class="bi bi-chat-heart" style="color:var(--accent-dark);"></i> Interactive AI</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- EDUVOICE -->
-      <div class="portfolio-card" data-cat="ai enterprise">
-        <div class="portfolio-thumb">
-          <span class="portfolio-status"><span class="dot"></span> Live Prototype</span>
-          <img src="assets/images/project-eduvoice.png" alt="EduVoice AI — Multilingual Voice Counselor Platform" loading="lazy" decoding="async" width="600" height="400">
-        </div>
-        <div class="portfolio-body">
-          <span class="portfolio-tag">AI · EdTech</span>
-          <h3>EduVoice AI Voice Counselor</h3>
-          <p>Multilingual AI voice admission counselor supporting English, Tamil, and Tanglish — delivers real-time college recommendations, cutoff analysis, and scholarship guidance via Gemini/GPT-4o.</p>
-          <div class="tech-stack-row">
-            <span class="tech-tag">Voice AI</span>
-            <span class="tech-tag">Tamil & Tanglish NLP</span>
-            <span class="tech-tag">Cutoff Engine</span>
-            <span class="tech-tag">WebSocket</span>
-          </div>
-          <div class="portfolio-action-row">
-            <button onclick="openModal('EduVoice AI Counselor')" class="btn-project-inquire">Inquire Architecture <i class="bi bi-arrow-right"></i></button>
-            <span style="font-size:12px; color:var(--muted); font-weight:600;"><i class="bi bi-mic-fill" style="color:var(--accent-dark);"></i> Voice + Text</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- FLYGGO -->
-      <div class="portfolio-card" data-cat="web">
-        <div class="portfolio-thumb">
-          <span class="portfolio-status"><span class="dot"></span> Production Grade</span>
-          <img src="assets/images/project-flyggo.png" alt="Flyggo Bus Travel — Full-Stack Booking Platform" loading="lazy" decoding="async" width="600" height="400">
-        </div>
-        <div class="portfolio-body">
-          <span class="portfolio-tag">Full-Stack · Travel</span>
-          <h3>Flyggo Bus Booking Platform</h3>
-          <p>Complete online bus ticket booking system with interactive seat selection maps, route search engine, admin dashboard with revenue analytics, and Firebase-powered authentication.</p>
-          <div class="tech-stack-row">
-            <span class="tech-tag">Interactive Seat Map</span>
-            <span class="tech-tag">Firebase Auth</span>
-            <span class="tech-tag">Revenue CRM</span>
-            <span class="tech-tag">REST API</span>
-          </div>
-          <div class="portfolio-action-row">
-            <button onclick="openModal('Flyggo Booking Engine')" class="btn-project-inquire">Inquire Architecture <i class="bi bi-arrow-right"></i></button>
-            <span style="font-size:12px; color:var(--muted); font-weight:600;"><i class="bi bi-speedometer2" style="color:var(--accent-dark);"></i> Real-Time Sync</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- COLLEGE CRM -->
-      <div class="portfolio-card" data-cat="enterprise">
-        <div class="portfolio-thumb">
-          <span class="portfolio-status"><span class="dot"></span> Multi-Portal ERP</span>
-          <img src="assets/images/project-college-crm.png" alt="College CRM — Multi-Role Institutional ERP Platform" loading="lazy" decoding="async" width="600" height="400">
-        </div>
-        <div class="portfolio-body">
-          <span class="portfolio-tag">Enterprise · EdTech</span>
-          <h3>College CRM Management System</h3>
-          <p>Multi-role institutional CRM with dedicated Admin, Faculty, Student, and Parent portals — featuring OTP authentication, library management, exam scheduling, and event coordination.</p>
-          <div class="tech-stack-row">
-            <span class="tech-tag">4 User Roles</span>
-            <span class="tech-tag">OTP Auth</span>
-            <span class="tech-tag">Exam Scheduler</span>
-            <span class="tech-tag">Attendance Engine</span>
-          </div>
-          <div class="portfolio-action-row">
-            <button onclick="openModal('Institutional CRM Suite')" class="btn-project-inquire">Inquire Architecture <i class="bi bi-arrow-right"></i></button>
-            <span style="font-size:12px; color:var(--muted); font-weight:600;"><i class="bi bi-shield-lock" style="color:var(--accent-dark);"></i> Role-Based Auth</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- WORKCONNECT -->
-      <div class="portfolio-card" data-cat="web">
-        <div class="portfolio-thumb">
-          <span class="portfolio-status"><span class="dot"></span> Marketplace</span>
-          <img src="assets/images/project-workconnect.png" alt="WorkConnect — Local Service Marketplace Platform" loading="lazy" decoding="async" width="600" height="400">
-        </div>
-        <div class="portfolio-body">
-          <span class="portfolio-tag">Full-Stack · Marketplace</span>
-          <h3>WorkConnect Service Platform</h3>
-          <p>Local service marketplace connecting customers with verified professionals — featuring 3-role dashboards, real-time booking workflow, admin approval system, and glassmorphism dark-mode UI.</p>
-          <div class="tech-stack-row">
-            <span class="tech-tag">3-Role Dashboard</span>
-            <span class="tech-tag">Service Verification</span>
-            <span class="tech-tag">Glassmorphism UI</span>
-            <span class="tech-tag">Booking Flow</span>
-          </div>
-          <div class="portfolio-action-row">
-            <button onclick="openModal('WorkConnect Marketplace')" class="btn-project-inquire">Inquire Architecture <i class="bi bi-arrow-right"></i></button>
-            <span style="font-size:12px; color:var(--muted); font-weight:600;"><i class="bi bi-people" style="color:var(--accent-dark);"></i> Multi-Tenant</span>
-          </div>
-        </div>
+      <div class="portfolio-nav-btns">
+        <button class="portfolio-nav-btn portfolio-btn-prev" aria-label="Previous Slide"><i class="bi bi-chevron-left"></i></button>
+        <button class="portfolio-nav-btn portfolio-btn-next" aria-label="Next Slide"><i class="bi bi-chevron-right"></i></button>
       </div>
     </div>
+
+    <!-- SWIPER CONTAINER -->
+    <div class="swiper portfolio-swiper reveal" id="portfolioSwiper">
+      <div class="swiper-wrapper">
+        <!-- RELIEFMIND -->
+        <div class="swiper-slide portfolio-card" data-cat="ai">
+          <div class="portfolio-card-head">
+            <div class="project-icon-box project-icon-health">
+              <i class="bi bi-heart-pulse-fill"></i>
+            </div>
+            <span class="portfolio-status"><span class="dot"></span> Live System</span>
+          </div>
+          <div class="portfolio-body">
+            <span class="portfolio-tag">AI · HealthTech</span>
+            <h3 class="portfolio-title">ReliefMind Triage</h3>
+            <p class="portfolio-desc">AI-powered bystander emergency triage system using LLM-driven symptom extraction, START disaster protocol alignment, and real-time Google Maps hospital locator with auto-radius expansion.</p>
+            
+            <div class="project-kpi-row">
+              <div class="kpi-item">
+                <span class="kpi-val">99.4%</span>
+                <span class="kpi-lbl">Triage Precision</span>
+              </div>
+              <div class="kpi-item">
+                <span class="kpi-val">&lt;50ms</span>
+                <span class="kpi-lbl">Protocol Match</span>
+              </div>
+            </div>
+
+            <div class="tech-stack-row">
+              <span class="tech-tag">Gemini AI</span>
+              <span class="tech-tag">Google Maps API</span>
+              <span class="tech-tag">START Protocol</span>
+              <span class="tech-tag">Node.js</span>
+            </div>
+
+            <div class="portfolio-action-row">
+              <button onclick="openModal('ReliefMind Triage Solution')" class="btn-project-inquire">Inquire Architecture <i class="bi bi-arrow-right"></i></button>
+              <span class="portfolio-badge-pill"><i class="bi bi-shield-check"></i> Enterprise SLA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MYHEALTH+ -->
+        <div class="swiper-slide portfolio-card" data-cat="ai">
+          <div class="portfolio-card-head">
+            <div class="project-icon-box project-icon-ai">
+              <i class="bi bi-cpu-fill"></i>
+            </div>
+            <span class="portfolio-status"><span class="dot"></span> Deployed System</span>
+          </div>
+          <div class="portfolio-body">
+            <span class="portfolio-tag">AI · Healthcare</span>
+            <h3 class="portfolio-title">MyHealth+ AI Analyzer</h3>
+            <p class="portfolio-desc">Full-stack health analyzer powered by Google Gemini AI for NLP-based symptom analysis, AI health assistant chatbot, searchable medicine database, and nearby facility locator.</p>
+            
+            <div class="project-kpi-row">
+              <div class="kpi-item">
+                <span class="kpi-val">100%</span>
+                <span class="kpi-lbl">NLP Automated</span>
+              </div>
+              <div class="kpi-item">
+                <span class="kpi-val">2,500+</span>
+                <span class="kpi-lbl">Drug DB Records</span>
+              </div>
+            </div>
+
+            <div class="tech-stack-row">
+              <span class="tech-tag">Gemini Pro</span>
+              <span class="tech-tag">NLP Extraction</span>
+              <span class="tech-tag">Medicine DB</span>
+              <span class="tech-tag">Express.js</span>
+            </div>
+
+            <div class="portfolio-action-row">
+              <button onclick="openModal('MyHealth+ AI Solution')" class="btn-project-inquire">Inquire Architecture <i class="bi bi-arrow-right"></i></button>
+              <span class="portfolio-badge-pill"><i class="bi bi-chat-heart"></i> Interactive AI</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- EDUVOICE -->
+        <div class="swiper-slide portfolio-card" data-cat="ai enterprise">
+          <div class="portfolio-card-head">
+            <div class="project-icon-box project-icon-voice">
+              <i class="bi bi-mic-fill"></i>
+            </div>
+            <span class="portfolio-status"><span class="dot"></span> Live Prototype</span>
+          </div>
+          <div class="portfolio-body">
+            <span class="portfolio-tag">AI · EdTech</span>
+            <h3 class="portfolio-title">EduVoice AI Counselor</h3>
+            <p class="portfolio-desc">Multilingual AI voice admission counselor supporting English, Tamil, and Tanglish — delivers real-time college recommendations, cutoff analysis, and scholarship guidance via Gemini/GPT-4o.</p>
+            
+            <div class="project-kpi-row">
+              <div class="kpi-item">
+                <span class="kpi-val">3 Dialects</span>
+                <span class="kpi-lbl">TN / EN / Tanglish</span>
+              </div>
+              <div class="kpi-item">
+                <span class="kpi-val">Real-Time</span>
+                <span class="kpi-lbl">Voice WebSocket</span>
+              </div>
+            </div>
+
+            <div class="tech-stack-row">
+              <span class="tech-tag">Voice AI</span>
+              <span class="tech-tag">Tamil NLP</span>
+              <span class="tech-tag">Cutoff Engine</span>
+              <span class="tech-tag">WebSocket</span>
+            </div>
+
+            <div class="portfolio-action-row">
+              <button onclick="openModal('EduVoice AI Counselor')" class="btn-project-inquire">Inquire Architecture <i class="bi bi-arrow-right"></i></button>
+              <span class="portfolio-badge-pill"><i class="bi bi-soundwave"></i> Dual Modality</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- FLYGGO -->
+        <div class="swiper-slide portfolio-card" data-cat="web">
+          <div class="portfolio-card-head">
+            <div class="project-icon-box project-icon-travel">
+              <i class="bi bi-bus-front-fill"></i>
+            </div>
+            <span class="portfolio-status"><span class="dot"></span> Production Grade</span>
+          </div>
+          <div class="portfolio-body">
+            <span class="portfolio-tag">Full-Stack · Travel</span>
+            <h3 class="portfolio-title">Flyggo Booking Engine</h3>
+            <p class="portfolio-desc">Complete online bus ticket booking system with interactive seat selection maps, route search engine, admin dashboard with revenue analytics, and Firebase-powered authentication.</p>
+            
+            <div class="project-kpi-row">
+              <div class="kpi-item">
+                <span class="kpi-val">Zero-Lag</span>
+                <span class="kpi-lbl">Real-Time Sync</span>
+              </div>
+              <div class="kpi-item">
+                <span class="kpi-val">30-Hour</span>
+                <span class="kpi-lbl">Express Delivery</span>
+              </div>
+            </div>
+
+            <div class="tech-stack-row">
+              <span class="tech-tag">Interactive Seat Map</span>
+              <span class="tech-tag">Firebase Auth</span>
+              <span class="tech-tag">Revenue CRM</span>
+              <span class="tech-tag">REST API</span>
+            </div>
+
+            <div class="portfolio-action-row">
+              <button onclick="openModal('Flyggo Booking Engine')" class="btn-project-inquire">Inquire Architecture <i class="bi bi-arrow-right"></i></button>
+              <span class="portfolio-badge-pill"><i class="bi bi-speedometer2"></i> High Throughput</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLLEGE CRM -->
+        <div class="swiper-slide portfolio-card" data-cat="enterprise">
+          <div class="portfolio-card-head">
+            <div class="project-icon-box project-icon-erp">
+              <i class="bi bi-mortarboard-fill"></i>
+            </div>
+            <span class="portfolio-status"><span class="dot"></span> Multi-Portal ERP</span>
+          </div>
+          <div class="portfolio-body">
+            <span class="portfolio-tag">Enterprise · EdTech</span>
+            <h3 class="portfolio-title">College CRM &amp; ERP System</h3>
+            <p class="portfolio-desc">Multi-role institutional CRM with dedicated Admin, Faculty, Student, and Parent portals — featuring OTP authentication, library management, exam scheduling, and event coordination.</p>
+            
+            <div class="project-kpi-row">
+              <div class="kpi-item">
+                <span class="kpi-val">4 Portals</span>
+                <span class="kpi-lbl">Role Isolation</span>
+              </div>
+              <div class="kpi-item">
+                <span class="kpi-val">OTP-Gated</span>
+                <span class="kpi-lbl">Secure Auth</span>
+              </div>
+            </div>
+
+            <div class="tech-stack-row">
+              <span class="tech-tag">4 User Roles</span>
+              <span class="tech-tag">OTP Auth</span>
+              <span class="tech-tag">Exam Scheduler</span>
+              <span class="tech-tag">Attendance Engine</span>
+            </div>
+
+            <div class="portfolio-action-row">
+              <button onclick="openModal('Institutional CRM Suite')" class="btn-project-inquire">Inquire Architecture <i class="bi bi-arrow-right"></i></button>
+              <span class="portfolio-badge-pill"><i class="bi bi-shield-lock"></i> Multi-Tenant</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- WORKCONNECT -->
+        <div class="swiper-slide portfolio-card" data-cat="web">
+          <div class="portfolio-card-head">
+            <div class="project-icon-box project-icon-market">
+              <i class="bi bi-briefcase-fill"></i>
+            </div>
+            <span class="portfolio-status"><span class="dot"></span> Live Marketplace</span>
+          </div>
+          <div class="portfolio-body">
+            <span class="portfolio-tag">Full-Stack · Marketplace</span>
+            <h3 class="portfolio-title">WorkConnect Platform</h3>
+            <p class="portfolio-desc">Local service marketplace connecting customers with verified professionals — featuring 3-role dashboards, real-time booking workflow, admin approval system, and glassmorphism UI.</p>
+            
+            <div class="project-kpi-row">
+              <div class="kpi-item">
+                <span class="kpi-val">3 Roles</span>
+                <span class="kpi-lbl">Customer / Pro / Admin</span>
+              </div>
+              <div class="kpi-item">
+                <span class="kpi-val">Automated</span>
+                <span class="kpi-lbl">KYC Verification</span>
+              </div>
+            </div>
+
+            <div class="tech-stack-row">
+              <span class="tech-tag">3-Role Dashboard</span>
+              <span class="tech-tag">Verification</span>
+              <span class="tech-tag">Glassmorphism UI</span>
+              <span class="tech-tag">Booking Flow</span>
+            </div>
+
+            <div class="portfolio-action-row">
+              <button onclick="openModal('WorkConnect Marketplace')" class="btn-project-inquire">Inquire Architecture <i class="bi bi-arrow-right"></i></button>
+              <span class="portfolio-badge-pill"><i class="bi bi-check2-circle"></i> Production Ready</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SWIPER PAGINATION -->
+    <div class="swiper-pagination portfolio-pagination reveal"></div>
   </div>
 </section>
 
@@ -743,6 +847,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="assets/js/tracking.js"></script>
 <script src="assets/js/main.js"></script>
 <script src="assets/js/leads.js"></script>

@@ -86,20 +86,71 @@ if (modal) {
   });
 }
 
-/* ---------- PORTFOLIO CATEGORY FILTER ---------- */
+/* ---------- PORTFOLIO SWIPER & CATEGORY FILTER ---------- */
+let portfolioSwiper = null;
+
+function initPortfolioSwiper() {
+  const swiperEl = document.getElementById('portfolioSwiper');
+  if (!swiperEl || typeof Swiper === 'undefined') return;
+
+  portfolioSwiper = new Swiper('#portfolioSwiper', {
+    slidesPerView: 1,
+    spaceBetween: 24,
+    grabCursor: true,
+    speed: 550,
+    observer: true,
+    observeParents: true,
+    autoplay: {
+      delay: 4500,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    navigation: {
+      nextEl: '.portfolio-btn-next',
+      prevEl: '.portfolio-btn-prev',
+    },
+    pagination: {
+      el: '.portfolio-pagination',
+      clickable: true,
+      dynamicBullets: true,
+    },
+    breakpoints: {
+      680: {
+        slidesPerView: 2,
+        spaceBetween: 24,
+      },
+      1080: {
+        slidesPerView: 3,
+        spaceBetween: 28,
+      }
+    }
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPortfolioSwiper);
+} else {
+  initPortfolioSwiper();
+}
+
 window.filterPortfolio = function(cat, btn) {
   document.querySelectorAll('.p-tab-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
   
-  const cards = document.querySelectorAll('#portfolioGrid .portfolio-card');
-  cards.forEach(card => {
-    const cardCats = (card.getAttribute('data-cat') || '').split(' ');
+  const slides = document.querySelectorAll('#portfolioSwiper .swiper-slide');
+  slides.forEach(slide => {
+    const cardCats = (slide.getAttribute('data-cat') || '').split(' ');
     if (cat === 'all' || cardCats.includes(cat)) {
-      card.style.display = 'flex';
+      slide.style.display = '';
     } else {
-      card.style.display = 'none';
+      slide.style.display = 'none';
     }
   });
+
+  if (portfolioSwiper) {
+    portfolioSwiper.update();
+    portfolioSwiper.slideTo(0, 400);
+  }
 };
 
 /* ---------- FAQ ACCORDION ---------- */
