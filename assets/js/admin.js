@@ -70,13 +70,13 @@ export const DEFAULT_PROJECTS = [
   },
   {
     id: "flyggo",
-    title: "Flyggo Bus Booking Platform",
+    title: "Flyggo Travel Booking Platform",
     category: "web",
     categoryLabel: "Full-Stack · Travel",
     status: "Production Grade",
     metric: "Real-Time Sync",
     image: "assets/images/project-flyggo.png",
-    description: "Complete online bus ticket booking system with interactive seat selection maps, route search engine, admin dashboard with revenue analytics, and Firebase authentication.",
+    description: "Complete online travel booking platform with interactive seat selection maps, route search engine, admin dashboard with revenue analytics, and Firebase authentication.",
     techStack: "Interactive Seat Map, Firebase Auth, Revenue CRM, REST API"
   },
   {
